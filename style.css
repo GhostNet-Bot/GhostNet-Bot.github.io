@@ -5,6 +5,7 @@ body {
 background: #ff0000;
 background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(64, 0, 173, 1) 100%);
 color: white;
+text-align: center;
 }
 
 code {
@@ -18,6 +19,13 @@ color: white;
 a:hover {
 color: grey;
 text-decoration: none;
+}
+
+footer {
+background: #0062ff;
+background: linear-gradient(180deg, rgba(0, 98, 255, 1) 0%, rgba(0, 39, 102, 1) 100%);
+color: white;
+text-align: center;
 }
 
 .button-29 {
