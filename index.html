@@ -3,181 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHOSTNET | VERIFICATION</title>
+    <title>GHOSTNET | PROJECT</title>
     <style>
-        :root {
-            --glow: #00ff41;
-            --bg: #050505;
-        }
+        :root { --glow: #00ff41; --bg: #050505; }
+        body { background-color: var(--bg); color: var(--glow); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        
+        /* Loader Styles */
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s; }
+        .progress-bar { width: 250px; height: 4px; background: #111; border-radius: 10px; overflow: hidden; margin-top: 20px; border: 1px solid #222; }
+        .progress-fill { height: 100%; width: 0%; background: var(--glow); box-shadow: 0 0 10px var(--glow); transition: width 0.3s; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--glow);
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
+        /* Content Styles */
+        #main-content { opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out; width: 90%; max-width: 900px; display: none; }
+        .dashboard { border: 1px solid #222; background: #0a0a0a; border-radius: 8px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        .nav { border-bottom: 1px solid #222; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .tag { background: rgba(0, 255, 65, 0.1); padding: 4px 10px; border-radius: 4px; font-size: 12px; border: 1px solid var(--glow); }
 
-        /* --- LOADING SCREEN STYLES --- */
-        #loading-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 1s ease-out;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: #111; border: 1px solid #222; padding: 20px; border-radius: 6px; }
+        .card h3 { margin-top: 0; color: #fff; font-size: 18px; }
+        .card p { color: #888; font-size: 14px; line-height: 1.5; }
 
-        .loader-text {
-            font-size: 18px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .progress-bar {
-            width: 300px;
-            height: 2px;
-            background: #111;
-            border: 1px solid var(--glow);
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: var(--glow);
-            box-shadow: 0 0 10px var(--glow);
-            transition: width 0.2s;
-        }
-
-        #verify-logs {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #555;
-            text-align: center;
-            height: 50px;
-        }
-
-        /* --- MAIN CONTENT (Hidden initially) --- */
-        #main-content {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 1s ease-in-out;
-            width: 80%;
-            max-width: 800px;
-        }
-
-        .terminal {
-            border: 1px solid var(--glow);
-            padding: 20px;
-            background: rgba(0, 20, 0, 0.1);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-
-        .header { border-bottom: 1px solid var(--glow); padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .stat-box { border: 1px solid rgba(0, 255, 65, 0.3); padding: 10px; font-size: 14px; }
-        .pulse { display: inline-block; width: 10px; height: 10px; background: var(--glow); border-radius: 50%; margin-right: 10px; animation: blink 1s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
+        .footer { margin-top: 30px; text-align: center; color: #444; font-size: 11px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <div id="loading-screen">
-        <div class="loader-text" id="status-msg">INITIALIZING SECURE HANDSHAKE</div>
-        <div class="progress-bar">
-            <div id="fill" class="progress-fill"></div>
-        </div>
-        <div id="verify-logs">Attempting to establish connection...</div>
+        <div style="letter-spacing: 4px; font-size: 14px;">GHOSTNET SYSTEMS</div>
+        <div class="progress-bar"><div id="fill" class="progress-fill"></div></div>
+        <div id="verify-logs" style="margin-top: 15px; font-size: 12px; color: #444;">Handshaking with Discord API...</div>
     </div>
 
     <div id="main-content">
-        <div class="terminal">
-            <div class="header">
-                <span>[ GHOSTNET_MAINFRAME_V2 ]</span>
-                <span>STATUS: SECURE</span>
+        <div class="dashboard">
+            <div class="nav">
+                <span style="font-weight: bold; letter-spacing: 2px;">GHOSTNET <span style="color:#fff;">PROJECT</span></span>
+                <span class="tag">v2.4 STABLE</span>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                > ACCESS GRANTED. WELCOME TO THE INNER CIRCLE.
+            <div style="margin-bottom: 30px;">
+                <h1 style="color: #fff; margin: 0 0 10px 0;">Next-Gen Discord Automation.</h1>
+                <p style="color: #888; margin: 0;">A powerful, lightweight solution for server management, security, and member engagement.</p>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <span style="color: #888;">NETWORK:</span> <br>
-                    <span class="pulse"></span>GHOSTNET-SECURE
+            <div class="grid">
+                <div class="card">
+                    <h3>🛡️ Advanced Security</h3>
+                    <p>Protects your server with automated surveillance and role-based access control systems.</p>
                 </div>
-                <div class="stat-box">
-                    <span style="color: #888;">UPTIME:</span> <br>
-                    100.00%
+                <div class="card">
+                    <h3>👋 Member Onboarding</h3>
+                    <p>Highly customizable welcome sequences with dynamic placeholders and auto-role assignment.</p>
                 </div>
-                <div class="stat-box">
-                    <span style="color: #888;">ENCRYPTION:</span> <br>
-                    RSA-4096 / P2P
+                <div class="card">
+                    <h3>⚙️ Easy Configuration</h3>
+                    <p>Manage everything through simple Discord commands. No complex dashboards required.</p>
                 </div>
-                <div class="stat-box">
-                    <span style="color: #888;">ACTIVE NODES:</span> <br>
-                    2,048 ONLINE
-                </div>
+            </div>
+
+            <div class="footer">
+                PROJECT GHOSTNET IS AN INDEPENDENT BOT DEVELOPMENT INITIATIVE. NO DATA IS LOGGED WITHOUT CONSENT.
             </div>
         </div>
     </div>
 
     <script>
         const logs = [
-            "Bypassing gateway...",
-            "Validating SSL certificates...",
-            "Decrypting RSA key exchange...",
-            "Establishing P2P tunnel...",
-            "Clearing local cache...",
-            "ACCESS GRANTED"
+            "Syncing modules...",
+            "Loading UI components...",
+            "Finalizing connection...",
+            "Ready."
         ];
 
         let width = 0;
         let logIndex = 0;
         const fill = document.getElementById('fill');
         const logEl = document.getElementById('verify-logs');
-        const statusMsg = document.getElementById('status-msg');
 
-        // The Loading Loop
         const interval = setInterval(() => {
             if (width >= 100) {
                 clearInterval(interval);
-                unlockSystem();
+                reveal();
             } else {
-                width += Math.random() * 15; // Random speed for realism
+                width += Math.random() * 20;
                 if (width > 100) width = 100;
                 fill.style.width = width + '%';
                 
-                // Update logs as it loads
-                if (width > (logIndex + 1) * 15 && logIndex < logs.length) {
+                if (width > (logIndex + 1) * 25 && logIndex < logs.length) {
                     logEl.innerText = logs[logIndex];
                     logIndex++;
                 }
             }
-        }, 300);
+        }, 400);
 
-        function unlockSystem() {
-            statusMsg.innerText = "SYSTEM UNLOCKED";
+        function reveal() {
             setTimeout(() => {
                 document.getElementById('loading-screen').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('loading-screen').style.display = 'none';
                     const main = document.getElementById('main-content');
-                    main.style.opacity = '1';
-                    main.style.transform = 'scale(1)';
-                }, 1000);
+                    main.style.display = 'block';
+                    setTimeout(() => {
+                        main.style.opacity = '1';
+                        main.style.transform = 'translateY(0)';
+                    }, 50);
+                }, 800);
             }, 500);
         }
     </script>
-
 </body>
 </html>
