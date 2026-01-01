@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👻/.../fake-cmd-hack-screen \\ GHOSTNET | COMMAND // 👻Priv</title>
+    <style>
+        :root {
+            --glow: #00ff41;
+            --bg: #050505;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--glow);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .terminal {
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid var(--glow);
+            padding: 20px;
+            background: rgba(0, 20, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            position: relative;
+        }
+
+        .header {
+            border-bottom: 1px solid var(--glow);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-box {
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .pulse {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--glow);
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid var(--glow);
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--glow); } }
+    </style>
+</head>
+<body>
+
+    <div class="terminal">
+        <div class="header">
+            <span>[ GHOSTNET_MAINFRAME_V2 ]</span>
+            <span>SYS_READY</span>
+        </div>
+
+        <div class="typing">
+            > INITIALIZING SECURE CONNECTION... DONE.
+        </div>
+
+        <div class="stats-grid" style="margin-top: 20px;">
+            <div class="stat-box">
+                <span style="color: #888;">NETWORK:</span> <br>
+                <span class="pulse"></span>ENCRYPTED
+            </div>
+            <div class="stat-box">
+                <span style="color: #888;">UPTIME:</span> <br>
+                99.98%
+            </div>
+            <div class="stat-box">
+                <span style="color: #888;">LOCATION:</span> <br>
+                [REDACTED]
+            </div>
+            <div class="stat-box">
+                <span style="color: #888;">ACTIVE NODES:</span> <br>
+                128
+            </div>
+        </div>
+
+        <p style="font-size: 12px; color: #444; margin-top: 30px; text-align: center;">
+            CONFIDENTIAL - ACCESS LOGGED - ID: 0x88219B
+        </p>
+    </div>
+
+</body>
+</html>
+</html>
