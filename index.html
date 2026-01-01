@@ -1,37 +1,134 @@
 <!DOCTYPE html>
-<html>
-  <head>
-<title>GhostNet: Coming Soon!</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <h1>😄 Welcome to GhostNet! 😄</h1>
-    <p>This website, along with our Discord bot, GhostNet, are <b>coming soon</b>!</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHOSTNET | COMMAND</title>
+    <style>
+        :root {
+            --glow: #00ff41;
+            --bg: #050505;
+        }
 
-    <hr />
-    <h2>🤔 What is GhostNet? 🤔</h2>
-    <p>GhostNet is a Discord bot made by NothingButTyler. NothingButTyler is thinking of what the bot should really do. This bot was originally used to pull a prank on one of NothingButTyler's friends, IsaacTheMan67, for revenge since Isaac tricked him into thinking he got hacked by a 24 year old man, when really it was him the entire time! NothingButTyler went extreme and made a fake hacking/raiding Discord server, which includes this bot. The bot's functionality at time was making welcome messages, goodbye messages, hacker messages, and other hacking related stuff. All of it was fake anyway, so why not make a bot that does fake hacking and raiding? More will come soon to this bot.</p>
+        body {
+            background-color: var(--bg);
+            color: var(--glow);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    <hr />
-    <h2>📌 Bookmark this tab! 📌</h2>
-    <p>If your excited to see what this bot will do, we recommend bookmarking this tab! We will soon be in the works of making this bot. It'll be awesome, we promise! <br /> To bookmark a tab, press the star on the far right of the address bar, or press <code>CTRL + D</code></p>
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
 
-    <hr />
-    <h2>🤫 Support server: Coming Soon! 🤫</h2>
-    <p>This section will update soon once our prank with Isaac is over, and maybe after a few projects completed. NothingButTyler is a pretty busy coder!</p>
+        .terminal {
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid var(--glow);
+            padding: 20px;
+            background: rgba(0, 20, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            position: relative;
+        }
 
-    <hr />
-    <h2>🥱 Bored? Check out the owner's other projects!</h2>
-    <p>He doesn't just do Discord bots and this website, he does a lot more! This area won't contain all of his projects, but it will very soon! <br /> Click the button to check out his other websites/projects!</p>
-    <a href="//nothingbuttyler.github.io/otherwebsites" target="_blank"><button class="button-29" role="button">View projects!</button></a>
+        .header {
+            border-bottom: 1px solid var(--glow);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
 
-    <hr />
-    <footer>
-    <p>This bot is coming very soon! Please stay tuned by pressing <code>CTRL + D</code> to bookmark this tab!
-    <br />
-    Copyright &copy; 2025 by NothingButTyler. All rights reserved.</p>
-  </body>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-box {
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .pulse {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--glow);
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid var(--glow);
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--glow); } }
+    </style>
+</head>
+<body>
+
+    <div class="terminal">
+        <div class="header">
+            <span>[ GHOSTNET_MAINFRAME_V2 ]</span>
+            <span>SYS_READY</span>
+        </div>
+
+        <div class="typing">
+            > INITIALIZING SECURE CONNECTION... DONE.
+        </div>
+
+        <div class="stats-grid" style="margin-top: 20px;">
+            <div class="stat-box">
+                <span style="color: #888;">NETWORK:</span> <br>
+                <span class="pulse"></span>ENCRYPTED
+            </div>
+            <div class="stat-box">
+                <span style="color: #888;">UPTIME:</span> <br>
+                99.98%
+            </div>
+            <div class="stat-box">
+                <span style="color: #888;">LOCATION:</span> <br>
+                [REDACTED]
+            </div>
+            <div class="stat-box">
+                <span style="color: #888;">ACTIVE NODES:</span> <br>
+                128
+            </div>
+        </div>
+
+        <p style="font-size: 12px; color: #444; margin-top: 30px; text-align: center;">
+            CONFIDENTIAL - ACCESS LOGGED - ID: 0x88219B
+        </p>
+    </div>
+
+</body>
+</html>
 </html>
