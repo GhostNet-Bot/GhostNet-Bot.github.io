@@ -5,166 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHOSTNET | COMMAND</title>
     <style>
-        :root { --glow: #00ff41; --bg: #050505; }
+        :root { --glow: #00ff41; --bg: #050505; --text-main: #e0e0e0; }
         
-        body { 
-            background-color: var(--bg); 
-            color: var(--glow); 
-            font-family: 'Courier New', Courier, monospace; 
-            margin: 0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            overflow: hidden; 
+        /* 1. RESET & BASE */
+        body { background-color: var(--bg); color: var(--glow); margin: 0; overflow: hidden; height: 100vh; font-family: 'Courier New', Courier, monospace; }
+
+        /* CRT SCANLINES */
+        body::after {
+            content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 1000; background-size: 100% 2px, 3px 100%; pointer-events: none;
         }
 
-        /* Scanline Overlay */
-        body::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 255, 0, 0.06));
-            z-index: 200;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-        }
-
-        /* Loader Styles */
+        /* 2. LOADING SCREEN (Hacker Style) */
         #loading-screen { 
-            position: fixed; 
-            top: 0; left: 0; width: 100%; height: 100%; 
-            background: var(--bg); 
-            z-index: 100; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            transition: opacity 0.8s; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); 
+            z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .progress-bar { width: 300px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px; }
-        .progress-fill { height: 100%; width: 0%; background: var(--glow); box-shadow: 0 0 10px var(--glow); transition: width 0.3s; }
+        .progress-bar { width: 250px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px; }
+        .progress-fill { height: 100%; width: 0%; background: var(--glow); transition: width 0.3s; }
 
-        /* Content Styles */
+        /* 3. MAIN DASHBOARD (Modern Style) */
         #main-content { 
-            opacity: 0; 
-            transform: scale(0.95); 
-            transition: all 0.8s ease-in-out; 
-            width: 90%; 
-            max-width: 850px; 
-            display: none; 
-            z-index: 10;
+            display: none; opacity: 0; padding: 40px; max-width: 1000px; margin: auto;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Readable font */
+            transition: all 0.8s ease-in-out;
         }
-        
+
         .terminal-box { 
-            border: 1px solid var(--glow); 
-            background: rgba(0, 20, 0, 0.05); 
-            padding: 30px; 
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1); 
+            border: 1px solid var(--glow); background: rgba(0, 255, 65, 0.02); padding: 30px; 
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.05); animation: glitch-border 5s infinite;
         }
-        
+
+        /* NAVIGATION & HEADER */
         .header { 
-            border-bottom: 1px solid var(--glow); 
-            padding-bottom: 15px; 
-            margin-bottom: 25px; 
-            display: flex; 
-            justify-content: space-between; 
+            border-bottom: 1px solid var(--glow); padding-bottom: 15px; margin-bottom: 25px; 
+            display: flex; justify-content: space-between; align-items: center;
         }
+        .nav-links span { 
+            margin-left: 20px; cursor: pointer; font-size: 13px; letter-spacing: 1px; color: var(--text-main); transition: 0.3s;
+        }
+        .nav-links span:hover { color: var(--glow); text-shadow: 0 0 8px var(--glow); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .card { border: 1px solid rgba(0, 255, 65, 0.3); padding: 15px; background: rgba(0, 255, 65, 0.02); }
-        .card h3 { margin-top: 0; font-size: 16px; text-transform: uppercase; letter-spacing: 2px; }
-        .card p { color: #aaa; font-size: 13px; line-height: 1.4; }
+        /* CONTENT PAGES */
+        .page { display: none; animation: fadeIn 0.5s ease; }
+        .page.active { display: block; }
 
-        .pulse { display: inline-block; width: 8px; height: 8px; background: var(--glow); border-radius: 50%; animation: blink 1s infinite; margin-right: 10px; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;}
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0, 255, 65, 0.1); padding: 20px; border-radius: 4px; }
+        .card h3 { color: var(--glow); margin-top: 0; font-family: 'Courier New', monospace; }
+        .card p { color: #bbb; line-height: 1.6; font-size: 14px; }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glitch-border { 0% { border-color: var(--glow); } 95% { border-color: var(--glow); } 96% { border-color: #fff; } 97% { border-color: var(--glow); } 100% { border-color: var(--glow); } }
+        
+        .status-dot { height: 8px; width: 8px; background: var(--glow); border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); } }
     </style>
 </head>
 <body>
 
     <div id="loading-screen">
-        <div style="letter-spacing: 5px;">GHOSTNET_OS_BOOTING...</div>
+        <div id="boot-text" style="letter-spacing: 5px;">LOAD_GHOSTNET_V2.SYS</div>
         <div class="progress-bar"><div id="fill" class="progress-fill"></div></div>
-        <div id="verify-logs" style="margin-top: 15px; font-size: 12px; color: #444;">Accessing Discord Gateway...</div>
+        <div id="log" style="margin-top: 15px; font-size: 12px; color: #444;">Accessing secure layers...</div>
     </div>
 
     <div id="main-content">
         <div class="terminal-box">
             <div class="header">
-                <span>[ GHOSTNET_SYSTEM_CORE ]</span>
-                <span><span class="pulse"></span>STATUS: STABLE</span>
-            </div>
-
-            <div style="margin-bottom: 30px;">
-                <h2 style="margin: 0 0 10px 0;">ADVANCED SERVER UTILITY</h2>
-                <p style="color: #888; margin: 0; font-size: 14px;">Deploying high-efficiency automation for modern Discord environments.</p>
-            </div>
-
-            <div class="grid">
-                <div class="card">
-                    <h3>01_SECURITY</h3>
-                    <p>Automated surveillance modules and role-management protocols to keep your server protected 24/7.</p>
-                </div>
-                <div class="card">
-                    <h3>02_ONBOARDING</h3>
-                    <p>Precision welcome sequences and auto-assignment of roles for seamless member integration.</p>
-                </div>
-                <div class="card">
-                    <h3>03_COMMANDS</h3>
-                    <p>Intuitive command structure built for speed and reliability. No external dashboard needed.</p>
+                <span style="font-family: 'Courier New', monospace; letter-spacing: 3px; font-weight: bold;">[ GHOSTNET ]</span>
+                <div class="nav-links">
+                    <span onclick="showPage('home')">HOME</span>
+                    <span onclick="showPage('features')">FEATURES</span>
+                    <span onclick="showPage('dev')">DEVELOPMENT</span>
+                    <span style="border-left: 1px solid #333; padding-left: 15px;"><span class="status-dot"></span>STABLE</span>
                 </div>
             </div>
 
-            <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid rgba(0, 255, 65, 0.2); font-size: 10px; color: #444; text-align: center;">
-                GHOSTNET PROJECT // ALL RIGHTS RESERVED // UNAUTHORIZED DUPLICATION IS A VIOLATION OF PROTOCOL
+            <div id="home" class="page active">
+                <h1 style="color: #fff;">The Future of Automation</h1>
+                <p style="color: var(--text-main);">GhostNet is an all-in-one Discord utility designed for server owners who demand precision and security. Built on a framework of speed and reliability, our system handles the heavy lifting so you can focus on building your community.</p>
+                <div class="grid">
+                    <div class="card">
+                        <h3>SURVEILLANCE</h3>
+                        <p>Real-time monitoring and activity logging to maintain server integrity without intrusive bots.</p>
+                    </div>
+                    <div class="card">
+                        <h3>ONBOARDING</h3>
+                        <p>Fully customizable welcome messages and automatic role distribution for a seamless user experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="features" class="page">
+                <h2 style="color: #fff;">System Modules</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>!welcome-setup</h3>
+                        <p>Interactive wizard to configure your server's welcome channel and custom greeting text.</p>
+                    </div>
+                    <div class="card">
+                        <h3>!autoroles</h3>
+                        <p>Assign up to 5 roles automatically to new members upon joining the mainframe.</p>
+                    </div>
+                    <div class="card">
+                        <h3>!ping</h3>
+                        <p>Low-latency response testing to ensure the bot is synchronized with Discord servers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dev" class="page">
+                <h2 style="color: #fff;">Development Logs</h2>
+                <p style="color: var(--text-main);">GhostNet is constantly evolving. Our developers are currently focused on optimizing Python-based interactions and reducing API overhead.</p>
+                <div class="card" style="width: 100%;">
+                    <p style="font-family: 'Courier New', monospace; font-size: 12px; color: var(--glow);">
+                        > v2.4 Patch: Added Test-Prank targeted mentions.<br>
+                        > v2.3 Patch: Integrated Flask web-keep-alive protocols.<br>
+                        > v2.0 Patch: Complete rewrite of the discord.py event handler.
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; font-size: 10px; color: #444; text-align: center; font-family: 'Courier New', monospace;">
+                GHOSTNET_SECURE_ACCESS // TERMINAL_ID: 88-144
             </div>
         </div>
     </div>
 
     <script>
-        const logs = [
-            "Mounting core files...",
-            "Checking API status...",
-            "Syncing neural-link...",
-            "Handshake complete."
-        ];
-
+        // 1. LOADING LOGIC
         let width = 0;
-        let logIndex = 0;
         const fill = document.getElementById('fill');
-        const logEl = document.getElementById('verify-logs');
+        const log = document.getElementById('log');
+        const messages = ["Mounting Core...", "Handshaking API...", "Syncing Nav...", "Ready."];
 
-        const interval = setInterval(() => {
+        const loading = setInterval(() => {
+            width += Math.random() * 20;
             if (width >= 100) {
-                clearInterval(interval);
-                reveal();
-            } else {
-                width += Math.random() * 25;
-                if (width > 100) width = 100;
-                fill.style.width = width + '%';
-                
-                if (width > (logIndex + 1) * 25 && logIndex < logs.length) {
-                    logEl.innerText = logs[logIndex];
-                    logIndex++;
-                }
+                width = 100;
+                clearInterval(loading);
+                setTimeout(reveal, 500);
             }
-        }, 350);
+            fill.style.width = width + '%';
+            log.innerText = messages[Math.floor(width/30)] || "Ready.";
+        }, 300);
 
         function reveal() {
+            document.getElementById('loading-screen').style.opacity = '0';
             setTimeout(() => {
-                document.getElementById('loading-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loading-screen').style.display = 'none';
-                    const main = document.getElementById('main-content');
-                    main.style.display = 'block';
-                    setTimeout(() => {
-                        main.style.opacity = '1';
-                        main.style.transform = 'scale(1)';
-                    }, 50);
-                }, 800);
-            }, 500);
+                document.getElementById('loading-screen').style.display = 'none';
+                const main = document.getElementById('main-content');
+                main.style.display = 'block';
+                setTimeout(() => { main.style.opacity = '1'; }, 50);
+            }, 800);
+        }
+
+        // 2. NAVIGATION LOGIC
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
     </script>
 </body>
