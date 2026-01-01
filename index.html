@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHOSTNET | COMMAND</title>
+    <title>GHOSTNET | VERIFICATION</title>
     <style>
         :root {
             --glow: #00ff41;
@@ -16,119 +16,168 @@
             font-family: 'Courier New', Courier, monospace;
             margin: 0;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Scanline Effect */
-        body::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
+        /* --- LOADING SCREEN STYLES --- */
+        #loading-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-out;
+        }
+
+        .loader-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 2px;
+            background: #111;
+            border: 1px solid var(--glow);
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--glow);
+            box-shadow: 0 0 10px var(--glow);
+            transition: width 0.2s;
+        }
+
+        #verify-logs {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #555;
+            text-align: center;
+            height: 50px;
+        }
+
+        /* --- MAIN CONTENT (Hidden initially) --- */
+        #main-content {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s ease-in-out;
+            width: 80%;
+            max-width: 800px;
         }
 
         .terminal {
-            width: 80%;
-            max-width: 800px;
             border: 1px solid var(--glow);
             padding: 20px;
             background: rgba(0, 20, 0, 0.1);
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-            position: relative;
         }
 
-        .header {
-            border-bottom: 1px solid var(--glow);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
+        .header { border-bottom: 1px solid var(--glow); padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-box { border: 1px solid rgba(0, 255, 65, 0.3); padding: 10px; font-size: 14px; }
+        .pulse { display: inline-block; width: 10px; height: 10px; background: var(--glow); border-radius: 50%; margin-right: 10px; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .stat-box {
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            padding: 10px;
-            font-size: 14px;
-        }
-
-        .pulse {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: var(--glow);
-            border-radius: 50%;
-            margin-right: 10px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        .typing {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: .15em solid var(--glow);
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--glow); } }
     </style>
 </head>
 <body>
 
-    <div class="terminal">
-        <div class="header">
-            <span>[ GHOSTNET_MAINFRAME_V2 ]</span>
-            <span>SYS_READY</span>
+    <div id="loading-screen">
+        <div class="loader-text" id="status-msg">INITIALIZING SECURE HANDSHAKE</div>
+        <div class="progress-bar">
+            <div id="fill" class="progress-fill"></div>
         </div>
-
-        <div class="typing">
-            > INITIALIZING SECURE CONNECTION... DONE.
-        </div>
-
-        <div class="stats-grid" style="margin-top: 20px;">
-            <div class="stat-box">
-                <span style="color: #888;">NETWORK:</span> <br>
-                <span class="pulse"></span>ENCRYPTED
-            </div>
-            <div class="stat-box">
-                <span style="color: #888;">UPTIME:</span> <br>
-                99.98%
-            </div>
-            <div class="stat-box">
-                <span style="color: #888;">LOCATION:</span> <br>
-                [REDACTED]
-            </div>
-            <div class="stat-box">
-                <span style="color: #888;">ACTIVE NODES:</span> <br>
-                128
-            </div>
-        </div>
-
-        <p style="font-size: 12px; color: #444; margin-top: 30px; text-align: center;">
-            CONFIDENTIAL - ACCESS LOGGED - ID: 0x88219B
-        </p>
+        <div id="verify-logs">Attempting to establish connection...</div>
     </div>
 
+    <div id="main-content">
+        <div class="terminal">
+            <div class="header">
+                <span>[ GHOSTNET_MAINFRAME_V2 ]</span>
+                <span>STATUS: SECURE</span>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                > ACCESS GRANTED. WELCOME TO THE INNER CIRCLE.
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span style="color: #888;">NETWORK:</span> <br>
+                    <span class="pulse"></span>GHOSTNET-SECURE
+                </div>
+                <div class="stat-box">
+                    <span style="color: #888;">UPTIME:</span> <br>
+                    100.00%
+                </div>
+                <div class="stat-box">
+                    <span style="color: #888;">ENCRYPTION:</span> <br>
+                    RSA-4096 / P2P
+                </div>
+                <div class="stat-box">
+                    <span style="color: #888;">ACTIVE NODES:</span> <br>
+                    2,048 ONLINE
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const logs = [
+            "Bypassing gateway...",
+            "Validating SSL certificates...",
+            "Decrypting RSA key exchange...",
+            "Establishing P2P tunnel...",
+            "Clearing local cache...",
+            "ACCESS GRANTED"
+        ];
+
+        let width = 0;
+        let logIndex = 0;
+        const fill = document.getElementById('fill');
+        const logEl = document.getElementById('verify-logs');
+        const statusMsg = document.getElementById('status-msg');
+
+        // The Loading Loop
+        const interval = setInterval(() => {
+            if (width >= 100) {
+                clearInterval(interval);
+                unlockSystem();
+            } else {
+                width += Math.random() * 15; // Random speed for realism
+                if (width > 100) width = 100;
+                fill.style.width = width + '%';
+                
+                // Update logs as it loads
+                if (width > (logIndex + 1) * 15 && logIndex < logs.length) {
+                    logEl.innerText = logs[logIndex];
+                    logIndex++;
+                }
+            }
+        }, 300);
+
+        function unlockSystem() {
+            statusMsg.innerText = "SYSTEM UNLOCKED";
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                    const main = document.getElementById('main-content');
+                    main.style.opacity = '1';
+                    main.style.transform = 'scale(1)';
+                }, 1000);
+            }, 500);
+        }
+    </script>
+
 </body>
-</html>
 </html>
