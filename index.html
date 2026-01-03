@@ -1,37 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME | GHOSTNET</title>
     <link rel="stylesheet" href="style.css">
-    <title>GHOSTNET | HOME</title>
+    <style>
+        /* Extra styles just for the extended Homepage */
+        #main-content { overflow-y: auto; height: 100vh; scroll-behavior: smooth; }
+        .hero { text-align: center; padding: 60px 20px; border-bottom: 1px solid rgba(0, 255, 65, 0.1); }
+        .section-title { text-align: center; color: var(--glow); font-family: 'Courier New', monospace; letter-spacing: 3px; margin-top: 50px; }
+        
+        /* How it Works Steps */
+        .steps-container { display: flex; justify-content: space-around; gap: 20px; margin: 40px 0; flex-wrap: wrap; }
+        .step-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 20px; flex: 1; min-width: 200px; text-align: center; position: relative; }
+        .step-num { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--glow); padding: 5px 12px; font-weight: bold; }
+
+        /* Review/Testimonial Section */
+        .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .review { border-left: 3px solid var(--glow); padding: 15px; background: rgba(0,255,65,0.02); font-style: italic; color: #888; }
+        
+        .cta-btn { display: inline-block; margin-top: 20px; padding: 12px 30px; border: 1px solid var(--glow); color: var(--glow); text-decoration: none; transition: 0.3s; font-weight: bold; letter-spacing: 1px; }
+        .cta-btn:hover { background: var(--glow); color: #000; box-shadow: 0 0 20px var(--glow); }
+    </style>
 </head>
 <body>
+
     <div id="loading-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#050505; z-index:2000; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:'Courier New';">
-        <div id="boot-text">LOAD_GHOSTNET.SYS</div>
-        <div id="log" style="font-size:12px; color:#444; margin-top:10px;">Initializing...</div>
+        <div style="letter-spacing: 5px; color: var(--glow);">INITIALIZING_GHOSTNET...</div>
+        <div style="width:250px; height:2px; background:#111; border:1px solid var(--glow); margin-top:20px;">
+            <div id="fill" style="height:100%; width:0%; background:var(--glow); transition:width 0.3s;"></div>
+        </div>
+        <div id="log" style="font-size:12px; color:#444; margin-top:10px;">Establishing secure handshake...</div>
     </div>
 
-    <div class="terminal-box">
-        <div class="header">
-            <span style="font-family:'Courier New'; font-weight:bold;">[ GHOSTNET ]</span>
-            <div class="nav-links">
-                <a href="index.html">HOME</a>
-                <a href="features.html">FEATURES</a>
-                <a href="dev.html">DEVELOPMENT</a>
+    <div id="main-content">
+        <div class="terminal-box">
+            <div class="header">
+                <span style="font-family:'Courier New'; font-weight:bold; letter-spacing: 3px;">[ GHOSTNET ]</span>
+                <div class="nav-links">
+                    <a href="index.html">HOME</a>
+                    <a href="features.html">FEATURES</a>
+                    <a href="dev.html">DEVELOPMENT</a>
+                </div>
             </div>
-        </div>
-        <h1>The Future of Automation</h1>
-        <p>GhostNet is an all-in-one Discord utility designed for precision and security.</p>
-        <div class="grid">
-            <div class="card"><h3>SURVEILLANCE</h3><p>Real-time activity monitoring.</p></div>
-            <div class="card"><h3>ONBOARDING</h3><p>Custom welcome sequences.</p></div>
+
+            <section class="hero">
+                <h1 style="font-size: 3rem; color: #fff; margin-bottom: 10px;">It's time to protect your server.</h1>
+                <p style="color: var(--text-main); font-size: 1.2rem;">GhostNet offers you the #1 Discord Surveillance & Management Utility.</p>
+                <a href="#" class="cta-btn">ADD TO SERVER</a>
+            </section>
+
+            <h2 class="section-title">SYSTEM CAPABILITIES</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Data Security</h3>
+                    <p>Your server data is encrypted and handled with absolute privacy. No third-party access allowed.</p>
+                </div>
+                <div class="card">
+                    <h3>Modular Roles</h3>
+                    <p>Assign and manage user roles dynamically based on custom-defined server triggers.</p>
+                </div>
+                <div class="card">
+                    <h3>Support 24/7</h3>
+                    <p>Join our dedicated support server for direct assistance with GhostNet configuration.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">HOW DOES IT WORK?</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <p>Invite GhostNet to your Discord server via the portal.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <p>Run the <span style="color:var(--glow)">!welcome-setup</span> command to initialize.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <p>Customize your surveillance and auto-role modules.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">USER FEEDBACK</h2>
+            <div class="review-grid">
+                <div class="review">"The best surveillance bot I've used. It's clean, fast, and the setup was incredibly easy." <br><br><b>- FallenIndigoAngel</b></div>
+                <div class="review">"Finally a bot that doesn't feel cluttered. The professional terminal aesthetic is amazing." <br><br><b>- Rainb0w Ph0enix</b></div>
+            </div>
+
+            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #222; text-align: center; color: #444; font-size: 12px;">
+                <p>PROJECT GHOSTNET // 2026 // ALL RIGHTS RESERVED</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Simple script to hide loader on first visit
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-        }, 2000);
+        // Loader Logic
+        let width = 0;
+        const fill = document.getElementById('fill');
+        const log = document.getElementById('log');
+        const messages = ["Mounting Core...", "Handshaking API...", "Syncing Nav...", "Ready."];
+
+        const loading = setInterval(() => {
+            width += Math.random() * 25;
+            if (width >= 100) {
+                width = 100;
+                clearInterval(loading);
+                setTimeout(reveal, 500);
+            }
+            fill.style.width = width + '%';
+            log.innerText = messages[Math.floor(width/30)] || "Ready.";
+        }, 300);
+
+        function reveal() {
+            document.getElementById('loading-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+                const main = document.getElementById('main-content');
+                main.style.display = 'block';
+                setTimeout(() => { main.style.opacity = '1'; }, 50);
+            }, 800);
+        }
     </script>
 </body>
 </html>
