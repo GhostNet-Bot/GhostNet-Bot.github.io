@@ -1,6 +1,19 @@
-:root { --glow: #00ff41; --bg: #050505; --text-main: #e0e0e0; }
+/* COPYRIGHT 2026 BY NOTHINGBUTTYLER. ALL RIGHTS RESERVED. */
 
-body { background-color: var(--bg); color: var(--glow); margin: 0; min-height: 100vh; font-family: 'Segoe UI', sans-serif; position: relative; }
+root { 
+    --glow: #00ff41; 
+    --bg: #050505;
+    --text-main: #e0e0e0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--glow);
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative; 
+}
 
 /* CRT SCANLINES */
 body::after {
@@ -25,9 +38,20 @@ body::after {
     margin-left: 20px; text-decoration: none; font-size: 13px; color: var(--text-main); font-family: 'Courier New', monospace;
 }
 
-.nav-links a:hover { color: var(--glow); text-shadow: 0 0 8px var(--glow); }
+.nav-links a:hover { 
+    color: var(--glow); 
+    text-shadow: 0 0 8px var(--glow);
+}
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0, 255, 65, 0.1); padding: 20px; }
+.grid { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; 
+}
+.card { 
+    background: rgba(255,255,255,0.03); 
+    border: 1px solid rgba(0, 255, 65, 0.1);
+    padding: 20px; 
+}
 
 @keyframes glitch-border { 0% { border-color: var(--glow); } 95% { border-color: var(--glow); } 96% { border-color: #fff; } 100% { border-color: var(--glow); } }
