@@ -6,34 +6,128 @@
     <title>HOME | GHOSTNET</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Extra styles just for the extended Homepage */
-        #main-content { overflow-y: auto; height: 100vh; scroll-behavior: smooth; }
-        .hero { text-align: center; padding: 60px 20px; border-bottom: 1px solid rgba(0, 255, 65, 0.1); }
-        .section-title { text-align: center; color: var(--glow); font-family: 'Courier New', monospace; letter-spacing: 3px; margin-top: 50px; }
+        :root { --glow: #00ff41; --bg: #050505; --text-main: #aaa; }
         
-        /* How it Works Steps */
-        .steps-container { display: flex; justify-content: space-around; gap: 20px; margin: 40px 0; flex-wrap: wrap; }
-        .step-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 20px; flex: 1; min-width: 200px; text-align: center; position: relative; }
-        .step-num { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--bg); border: 1px solid var(--glow); padding: 5px 12px; font-weight: bold; }
+        /* THE HACKER VIBE */
+        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; }
+        
+        #main-content { overflow-y: auto; height: 100vh; scroll-behavior: smooth; position: relative; }
 
-        /* Review/Testimonial Section */
-        .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .review { border-left: 3px solid var(--glow); padding: 15px; background: rgba(0,255,65,0.02); font-style: italic; color: #888; }
-        
-        .cta-btn { display: inline-block; margin-top: 20px; padding: 12px 30px; border: 1px solid var(--glow); color: var(--glow); text-decoration: none; transition: 0.3s; font-weight: bold; letter-spacing: 1px; }
-        .cta-btn:hover { background: var(--glow); color: #000; box-shadow: 0 0 20px var(--glow); }
+        /* HERO SECTION - RECLAIMED */
+        .hero { 
+            text-align: center; 
+            padding: 80px 20px; 
+            border: 1px solid var(--glow);
+            margin: 20px;
+            background: rgba(0, 255, 65, 0.02);
+            box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        .hero h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 5px; text-shadow: 0 0 10px var(--glow); }
+
+        .section-title { 
+            text-align: left; 
+            color: var(--glow); 
+            padding: 10px;
+            border-left: 5px solid var(--glow);
+            background: rgba(0, 255, 65, 0.05);
+            margin: 40px 20px 20px 20px;
+            font-size: 1.2rem;
+        }
+
+        /* STEPS - TERMINAL STYLE */
+        .steps-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 0 20px; }
+        .step-card { border: 1px solid rgba(0, 255, 65, 0.2); padding: 20px; background: #080808; position: relative; }
+        .step-card:hover { border-color: var(--glow); box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); }
+        .step-num { color: var(--glow); font-weight: bold; margin-bottom: 10px; display: block; }
+
+        /* REVIEWS - ENCRYPTED LOOK */
+        .review-grid { padding: 0 20px; margin-bottom: 50px; }
+        .review { 
+            border: 1px dashed rgba(0, 255, 65, 0.3); 
+            padding: 20px; 
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            font-size: 13px;
+        }
+        .review b { color: #fff; }
+
+        /* PULSING CTA */
+        .cta-btn { 
+            display: inline-block; 
+            padding: 15px 40px; 
+            background: transparent;
+            border: 1px solid var(--glow); 
+            color: var(--glow); 
+            text-decoration: none; 
+            transition: 0.3s; 
+            font-weight: bold; 
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0px var(--glow); }
+            50% { box-shadow: 0 0 15px var(--glow); }
+            100% { box-shadow: 0 0 0px var(--glow); }
+        }
+        .cta-btn:hover { background: var(--glow); color: #000; }
     </style>
 </head>
 <body>
 
-    <div id="loading-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#050505; z-index:2000; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:'Courier New';">
-        <div style="letter-spacing: 5px; color: var(--glow);">INITIALIZING_GHOSTNET...</div>
-        <div style="width:250px; height:2px; background:#111; border:1px solid var(--glow); margin-top:20px;">
-            <div id="fill" style="height:100%; width:0%; background:var(--glow); transition:width 0.3s;"></div>
+    <div id="main-content">
+        <div class="terminal-box" style="border:none; background:transparent;">
+            
+            <div class="header" style="margin: 20px;">
+                <span style="font-weight:bold; letter-spacing: 5px;">[ GHOSTNET ]</span>
+                <div class="nav-links">
+                    <a href="index.html">_HOME</a>
+                    <a href="features.html">_MODULES</a>
+                    <a href="dev.html">_LOGS</a>
+                </div>
+            </div>
+
+            <section class="hero">
+                <h1>SYSTEM_PROTECTION_ENABLED</h1>
+                <p>> GhostNet: The premier surveillance and automation interface for elite servers.</p>
+                <br>
+                <a href="#" class="cta-btn">EXECUTE_INVITE</a>
+            </section>
+
+            <div class="section-title">DEPLOYMENT_SEQUENCE</div>
+            <div class="steps-container">
+                <div class="step-card">
+                    <span class="step-num">[STEP_01]</span>
+                    <p>Invite the GHOSTNET instance to your primary terminal.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">[STEP_02]</span>
+                    <p>Run !welcome-setup to initialize the configuration wizard.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">[STEP_03]</span>
+                    <p>Activate surveillance and role-assignment subroutines.</p>
+                </div>
+            </div>
+
+            <div class="section-title">COMM_LOGS (TESTIMONIALS)</div>
+            <div class="review-grid">
+                <div class="review">
+                    <span style="color:var(--glow)">USER_INDR:</span> "Encryption is solid. Surveillance modules running at 99% efficiency."<br>
+                    <b>- FallenIndigoAngel</b>
+                </div>
+                <div class="review">
+                    <span style="color:var(--glow)">USER_INDR:</span> "The most intuitive terminal interface I've accessed this year."<br>
+                    <b>- Rainb0w Ph0enix</b>
+                </div>
+            </div>
+
+            <div style="text-align: center; color: #333; font-size: 10px; padding-bottom: 40px;">
+                GHOSTNET // TERMINAL_ID_88 // NO_LOG_POLICY_ACTIVE
+            </div>
         </div>
-        <div id="log" style="font-size:12px; color:#444; margin-top:10px;">Establishing secure handshake...</div>
     </div>
 
+</body>
+</html>
     <div id="main-content">
         <div class="terminal-box">
             <div class="header">
