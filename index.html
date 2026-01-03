@@ -6,216 +6,138 @@
     <title>HOME | GHOSTNET</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        :root { --glow: #00ff41; --bg: #050505; --text-main: #aaa; }
+        :root { --glow: #00ff41; --bg: #050505; }
         
-        /* THE HACKER VIBE */
-        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; }
+        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; }
         
-        #main-content { overflow-y: auto; height: 100vh; scroll-behavior: smooth; position: relative; }
+        #main-content { opacity: 0; display: none; transition: opacity 1s; }
 
-        /* HERO SECTION - RECLAIMED */
+        /* HERO SECTION */
         .hero { 
             text-align: center; 
             padding: 80px 20px; 
             border: 1px solid var(--glow);
             margin: 20px;
             background: rgba(0, 255, 65, 0.02);
-            box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
         }
-        .hero h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 5px; text-shadow: 0 0 10px var(--glow); }
+        .hero h1 { font-size: 2.5rem; letter-spacing: 2px; }
 
+        /* SECTIONS */
         .section-title { 
-            text-align: left; 
             color: var(--glow); 
-            padding: 10px;
-            border-left: 5px solid var(--glow);
-            background: rgba(0, 255, 65, 0.05);
+            padding: 10px 20px;
+            border-left: 4px solid var(--glow);
             margin: 40px 20px 20px 20px;
-            font-size: 1.2rem;
+            text-transform: uppercase;
         }
 
-        /* STEPS - TERMINAL STYLE */
-        .steps-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 0 20px; }
-        .step-card { border: 1px solid rgba(0, 255, 65, 0.2); padding: 20px; background: #080808; position: relative; }
-        .step-card:hover { border-color: var(--glow); box-shadow: 0 0 15px rgba(0, 255, 65, 0.2); }
-        .step-num { color: var(--glow); font-weight: bold; margin-bottom: 10px; display: block; }
-
-        /* REVIEWS - ENCRYPTED LOOK */
-        .review-grid { padding: 0 20px; margin-bottom: 50px; }
-        .review { 
-            border: 1px dashed rgba(0, 255, 65, 0.3); 
-            padding: 20px; 
-            margin-bottom: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            font-size: 13px;
-        }
-        .review b { color: #fff; }
-
-        /* PULSING CTA */
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 0 20px; }
+        .feature-card { border: 1px solid rgba(0, 255, 65, 0.2); padding: 20px; background: #080808; }
+        
+        /* BUTTON */
         .cta-btn { 
             display: inline-block; 
-            padding: 15px 40px; 
-            background: transparent;
+            padding: 15px 35px; 
             border: 1px solid var(--glow); 
             color: var(--glow); 
             text-decoration: none; 
-            transition: 0.3s; 
-            font-weight: bold; 
-            animation: pulse-border 2s infinite;
+            margin-top: 20px;
+            transition: 0.3s;
         }
-        @keyframes pulse-border {
-            0% { box-shadow: 0 0 0px var(--glow); }
-            50% { box-shadow: 0 0 15px var(--glow); }
-            100% { box-shadow: 0 0 0px var(--glow); }
+        .cta-btn:hover { background: var(--glow); color: #000; box-shadow: 0 0 20px var(--glow); }
+
+        /* LOADER */
+        #loading-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: var(--bg); z-index: 3000; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
         }
-        .cta-btn:hover { background: var(--glow); color: #000; }
+        .bar { width: 200px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px; }
+        .fill { height: 100%; width: 0%; background: var(--glow); }
     </style>
 </head>
 <body>
 
-    <div id="main-content">
-        <div class="terminal-box" style="border:none; background:transparent;">
-            
-            <div class="header" style="margin: 20px;">
-                <span style="font-weight:bold; letter-spacing: 5px;">[ GHOSTNET ]</span>
-                <div class="nav-links">
-                    <a href="index.html">_HOME</a>
-                    <a href="features.html">_MODULES</a>
-                    <a href="dev.html">_LOGS</a>
-                </div>
-            </div>
-
-            <section class="hero">
-                <h1>SYSTEM_PROTECTION_ENABLED</h1>
-                <p>> GhostNet: The premier surveillance and automation interface for elite servers.</p>
-                <br>
-                <a href="#" class="cta-btn">EXECUTE_INVITE</a>
-            </section>
-
-            <div class="section-title">DEPLOYMENT_SEQUENCE</div>
-            <div class="steps-container">
-                <div class="step-card">
-                    <span class="step-num">[STEP_01]</span>
-                    <p>Invite the GHOSTNET instance to your primary terminal.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-num">[STEP_02]</span>
-                    <p>Run !welcome-setup to initialize the configuration wizard.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-num">[STEP_03]</span>
-                    <p>Activate surveillance and role-assignment subroutines.</p>
-                </div>
-            </div>
-
-            <div class="section-title">COMM_LOGS (TESTIMONIALS)</div>
-            <div class="review-grid">
-                <div class="review">
-                    <span style="color:var(--glow)">USER_INDR:</span> "Encryption is solid. Surveillance modules running at 99% efficiency."<br>
-                    <b>- FallenIndigoAngel</b>
-                </div>
-                <div class="review">
-                    <span style="color:var(--glow)">USER_INDR:</span> "The most intuitive terminal interface I've accessed this year."<br>
-                    <b>- Rainb0w Ph0enix</b>
-                </div>
-            </div>
-
-            <div style="text-align: center; color: #333; font-size: 10px; padding-bottom: 40px;">
-                GHOSTNET // TERMINAL_ID_88 // NO_LOG_POLICY_ACTIVE
-            </div>
-        </div>
+    <div id="loading-screen">
+        <div style="letter-spacing: 3px;">SYSTEM BOOTING...</div>
+        <div class="bar"><div id="fill" class="fill"></div></div>
+        <div id="status" style="font-size: 12px; margin-top: 10px; color: #444;">Connecting...</div>
     </div>
 
-</body>
-</html>
     <div id="main-content">
-        <div class="terminal-box">
-            <div class="header">
-                <span style="font-family:'Courier New'; font-weight:bold; letter-spacing: 3px;">[ GHOSTNET ]</span>
-                <div class="nav-links">
-                    <a href="index.html">HOME</a>
-                    <a href="features.html">FEATURES</a>
-                    <a href="dev.html">DEVELOPMENT</a>
-                </div>
-            </div>
-
-            <section class="hero">
-                <h1 style="font-size: 3rem; color: #fff; margin-bottom: 10px;">It's time to protect your server.</h1>
-                <p style="color: var(--text-main); font-size: 1.2rem;">GhostNet offers you the #1 Discord Surveillance & Management Utility.</p>
-                <a href="#" class="cta-btn">ADD TO SERVER</a>
-            </section>
-
-            <h2 class="section-title">SYSTEM CAPABILITIES</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Data Security</h3>
-                    <p>Your server data is encrypted and handled with absolute privacy. No third-party access allowed.</p>
-                </div>
-                <div class="card">
-                    <h3>Modular Roles</h3>
-                    <p>Assign and manage user roles dynamically based on custom-defined server triggers.</p>
-                </div>
-                <div class="card">
-                    <h3>Support 24/7</h3>
-                    <p>Join our dedicated support server for direct assistance with GhostNet configuration.</p>
-                </div>
-            </div>
-
-            <h2 class="section-title">HOW DOES IT WORK?</h2>
-            <div class="steps-container">
-                <div class="step-card">
-                    <div class="step-num">1</div>
-                    <p>Invite GhostNet to your Discord server via the portal.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">2</div>
-                    <p>Run the <span style="color:var(--glow)">!welcome-setup</span> command to initialize.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">3</div>
-                    <p>Customize your surveillance and auto-role modules.</p>
-                </div>
-            </div>
-
-            <h2 class="section-title">USER FEEDBACK</h2>
-            <div class="review-grid">
-                <div class="review">"The best surveillance bot I've used. It's clean, fast, and the setup was incredibly easy." <br><br><b>- FallenIndigoAngel</b></div>
-                <div class="review">"Finally a bot that doesn't feel cluttered. The professional terminal aesthetic is amazing." <br><br><b>- Rainb0w Ph0enix</b></div>
-            </div>
-
-            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #222; text-align: center; color: #444; font-size: 12px;">
-                <p>PROJECT GHOSTNET // 2026 // ALL RIGHTS RESERVED</p>
+        <div class="header" style="margin: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--glow); padding-bottom: 10px;">
+            <span style="font-weight: bold;">[ GHOSTNET ]</span>
+            <div class="nav-links" style="font-size: 14px;">
+                <a href="index.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">HOME</a>
+                <a href="features.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">FEATURES</a>
+                <a href="dev.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">LOGS</a>
             </div>
         </div>
+
+        <section class="hero">
+            <h1>It's time to protect your server.</h1>
+            <p>GhostNet is a powerful Discord utility designed for surveillance and automation.</p>
+            <a href="#" class="cta-btn">ADD TO DISCORD</a>
+        </section>
+
+        <div class="section-title">Core Capabilities</div>
+        <div class="content-grid">
+            <div class="feature-card">
+                <h3>Surveillance</h3>
+                <p>Monitor server activity with advanced logging tools to keep your community safe.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Auto Roles</h3>
+                <p>Assign roles to new members instantly to manage permissions without manual work.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Setup Wizard</h3>
+                <p>Use simple commands like !welcome-setup to configure the bot in seconds.</p>
+            </div>
+        </div>
+
+        <div class="section-title">How to get started</div>
+        <div class="content-grid">
+            <div class="feature-card">
+                <h4 style="color: var(--glow);">01. Invite</h4>
+                <p>Add the bot to your server using the invite link.</p>
+            </div>
+            <div class="feature-card">
+                <h4 style="color: var(--glow);">02. Configure</h4>
+                <p>Run the setup commands to customize your settings.</p>
+            </div>
+            <div class="feature-card">
+                <h4 style="color: var(--glow);">03. Secure</h4>
+                <p>Sit back while GhostNet handles the server management.</p>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 40px; color: #333; font-size: 12px;">
+            GHOSTNET PROJECT | 2026
+        </footer>
     </div>
 
     <script>
-        // Loader Logic
-        let width = 0;
-        const fill = document.getElementById('fill');
-        const log = document.getElementById('log');
-        const messages = ["Mounting Core...", "Handshaking API...", "Syncing Nav...", "Ready."];
+        let w = 0;
+        const f = document.getElementById('fill');
+        const s = document.getElementById('status');
+        const msgs = ["Loading...", "Syncing...", "Decrypting...", "Complete"];
 
-        const loading = setInterval(() => {
-            width += Math.random() * 25;
-            if (width >= 100) {
-                width = 100;
-                clearInterval(loading);
-                setTimeout(reveal, 500);
+        const load = setInterval(() => {
+            w += Math.random() * 20;
+            if (w >= 100) {
+                w = 100;
+                clearInterval(load);
+                setTimeout(() => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                    const main = document.getElementById('main-content');
+                    main.style.display = 'block';
+                    setTimeout(() => { main.style.opacity = '1'; }, 50);
+                }, 500);
             }
-            fill.style.width = width + '%';
-            log.innerText = messages[Math.floor(width/30)] || "Ready.";
+            f.style.width = w + '%';
+            s.innerText = msgs[Math.floor(w/30)] || "Complete";
         }, 300);
-
-        function reveal() {
-            document.getElementById('loading-screen').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loading-screen').style.display = 'none';
-                const main = document.getElementById('main-content');
-                main.style.display = 'block';
-                setTimeout(() => { main.style.opacity = '1'; }, 50);
-            }, 800);
-        }
     </script>
 </body>
 </html>
