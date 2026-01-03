@@ -1,0 +1,33 @@
+:root { --glow: #00ff41; --bg: #050505; --text-main: #e0e0e0; }
+
+body { background-color: var(--bg); color: var(--glow); margin: 0; min-height: 100vh; font-family: 'Segoe UI', sans-serif; position: relative; }
+
+/* CRT SCANLINES */
+body::after {
+    content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 1000; background-size: 100% 2px, 3px 100%; pointer-events: none;
+}
+
+.terminal-box { 
+    border: 1px solid var(--glow); background: rgba(0, 255, 65, 0.02); padding: 30px; 
+    margin: 40px auto; max-width: 900px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.05); 
+    animation: glitch-border 5s infinite;
+}
+
+.header { 
+    border-bottom: 1px solid var(--glow); padding-bottom: 15px; margin-bottom: 25px; 
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.nav-links a { 
+    margin-left: 20px; text-decoration: none; font-size: 13px; color: var(--text-main); font-family: 'Courier New', monospace;
+}
+
+.nav-links a:hover { color: var(--glow); text-shadow: 0 0 8px var(--glow); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(0, 255, 65, 0.1); padding: 20px; }
+
+@keyframes glitch-border { 0% { border-color: var(--glow); } 95% { border-color: var(--glow); } 96% { border-color: #fff; } 100% { border-color: var(--glow); } }
