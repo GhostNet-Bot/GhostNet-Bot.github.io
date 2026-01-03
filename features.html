@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHOSTNET | FEATURES</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --glow: #00ff41; --bg: #050505; }
+        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; }
+        .command-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .command-table th { text-align: left; border-bottom: 1px solid var(--glow); padding: 10px; color: #fff; }
+        .command-table td { padding: 15px 10px; border-bottom: 1px solid rgba(0, 255, 65, 0.1); font-size: 14px; }
+        .cmd-name { color: var(--glow); font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header" style="margin: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--glow); padding-bottom: 10px;">
+        <span style="font-weight: bold;">[ GHOSTNET ]</span>
+        <div class="nav-links">
+            <a href="index.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">HOME</a>
+            <a href="features.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">FEATURES</a>
+            <a href="dev.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">LOGS</a>
+        </div>
+    </div>
+
+    <div style="padding: 20px; max-width: 900px; margin: auto;">
+        <h1 style="border-left: 4px solid var(--glow); padding-left: 15px;">SYSTEM MODULES</h1>
+        <p style="color: #888;">Complete directory of available GhostNet commands and automation protocols.</p>
+
+        <table class="command-table">
+            <thead>
+                <tr>
+                    <th>COMMAND</th>
+                    <th>DESCRIPTION</th>
+                    <th>PERMISSION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="cmd-name">!welcome-setup</td>
+                    <td>Starts the interactive wizard to set greeting messages and channels.</td>
+                    <td style="color: #ff4444;">Admin</td>
+                </tr>
+                <tr>
+                    <td class="cmd-name">!autoroles</td>
+                    <td>Configure up to 5 roles to be assigned automatically to new users.</td>
+                    <td style="color: #ff4444;">Admin</td>
+                </tr>
+                <tr>
+                    <td class="cmd-name">!ping</td>
+                    <td>Check connection latency between the mainframe and Discord.</td>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td class="cmd-name">!help</td>
+                    <td>Displays the command directory within the Discord interface.</td>
+                    <td>User</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
