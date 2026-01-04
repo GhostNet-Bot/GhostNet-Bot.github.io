@@ -72,16 +72,62 @@
     <div id="main-content">
         <div class="dash-container">
             <div class="panel">
-                <div class="panel-header"><i class="fas fa-server"></i> SYSTEM_HEALTH</div>
-                <div class="stat-row"><span class="stat-label">Uptime:</span> <span>99.98%</span></div>
-                <div class="stat-row"><span class="stat-label">CPU_Load:</span> <span>12%</span></div>
-                <div class="stat-row"><span class="stat-label">Active_Nodes:</span> <span>42</span></div>
-                <div class="stat-row"><span class="stat-label">Latency:</span> <span style="color: #00ff41;">14ms</span></div>
-                
-                <div class="panel-header" style="margin-top: 30px;"><i class="fas fa-shield-halved"></i> SECURITY</div>
-                <div class="stat-row"><span class="stat-label">Firewall:</span> <span style="color: #00ff41;">ACTIVE</span></div>
-                <div class="stat-row"><span class="stat-label">Threat_Level:</span> <span style="color: #666;">NULL</span></div>
+<div class="panel" style="background: #080808; overflow-y: auto;">
+    <div class="panel-header"><i class="fas fa-gears"></i> SERVER_CONFIG</div>
+    
+    <div style="margin-bottom: 20px;">
+        <label style="font-size: 10px; color: #444;">SELECT_TARGET_SERVER:</label>
+        <select style="width: 100%; background: #000; color: var(--glow); border: 1px solid var(--glow); padding: 8px; margin-top: 5px;">
+            <option>GHOSTNET_OFFICIAL_HQ</option>
+            <option>COMMUNITY_SERVER_01</option>
+            <option>DEVELOPER_TEST_LAB</option>
+        </select>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        
+        <div style="border: 1px solid #222; padding: 15px; background: rgba(255,255,255,0.01);">
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 12px; font-weight: bold;">WELCOME_LOGS</span>
+                <input type="checkbox" checked>
             </div>
+            <p style="font-size: 10px; color: #666; margin: 10px 0;">Greet new members with custom protocol.</p>
+            <input type="text" placeholder="Enter message..." style="width: 90%; background: #000; border: 1px solid #333; color: var(--glow); padding: 5px; font-size: 11px;">
+        </div>
+
+        <div style="border: 1px solid #222; padding: 15px; background: rgba(255,255,255,0.01);">
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 12px; font-weight: bold;">AUTO_PERMISSION</span>
+                <input type="checkbox">
+            </div>
+            <p style="font-size: 10px; color: #666; margin: 10px 0;">Assign roles automatically on join.</p>
+            <select style="width: 100%; background: #000; border: 1px solid #333; color: var(--glow); font-size: 11px;">
+                <option>@Member</option>
+                <option>@Initiate</option>
+            </select>
+        </div>
+
+        <div style="border: 1px solid #222; padding: 15px; background: rgba(255,255,255,0.01);">
+            <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: 12px; font-weight: bold;">SURVEILLANCE</span>
+                <input type="checkbox" checked>
+            </div>
+            <p style="font-size: 10px; color: #666; margin: 10px 0;">Log deleted messages and edits.</p>
+        </div>
+
+        <div style="border: 1px solid var(--glow); padding: 15px; background: rgba(0,255,65,0.05); text-align: center; cursor: pointer;">
+            <span style="font-size: 12px; font-weight: bold;">RUN_SETUP_WIZARD</span>
+            <p style="font-size: 10px; color: var(--glow); margin-top: 5px;">Configure all channels automatically.</p>
+        </div>
+
+    </div>
+
+    <div class="panel-header" style="margin-top: 30px;"><i class="fas fa-terminal"></i> LIVE_SESSION_FEED</div>
+    <div id="console" style="height: 150px; background: #000; border: 1px solid #111; padding: 10px; font-size: 11px; overflow-y: auto;">
+        <p style="color: #444;">[SYSTEM] Configuration module loaded.</p>
+    </div>
+</div>
+
 
             <div class="panel" style="background: #080808;">
                 <div class="panel-header"><i class="fas fa-terminal"></i> LIVE_MAIN_FRAME</div>
