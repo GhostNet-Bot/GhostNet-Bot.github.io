@@ -6,7 +6,7 @@ function initPage() {
     const fill = document.getElementById('fill');
     const status = document.getElementById('status');
 
-    // 1. SMART LOADER CHECK
+    // 1. SMART LOADER CHECK \\
     if (sessionStorage.getItem('booted')) {
         if (loader) loader.style.display = 'none';
         if (content) {
@@ -49,3 +49,25 @@ function runBootSequence(loader, content, fill, status) {
 
 // Start the check as soon as the DOM is ready
 document.addEventListener('DOMContentLoaded', initPage);
+
+// 2. INDEX.HTML FULL SCRIPT \\
+        let w = 0;
+        const f = document.getElementById('fill');
+        const s = document.getElementById('status');
+        const msgs = ["Loading...", "Syncing...", "Decrypting...", "Complete"];
+
+        const load = setInterval(() => {
+            w += Math.random() * 20;
+            if (w >= 100) {
+                w = 100;
+                clearInterval(load);
+                setTimeout(() => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                    const main = document.getElementById('main-content');
+                    main.style.display = 'block';
+                    setTimeout(() => { main.style.opacity = '1'; }, 50);
+                }, 500);
+            }
+            f.style.width = w + '%';
+            s.innerText = msgs[Math.floor(w/30)] || "Complete";
+        }, 300);
