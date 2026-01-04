@@ -106,3 +106,21 @@ function moveReview(dir) {
     document.getElementById('review-text').innerText = reviews[currentReview].text;
     document.getElementById('review-user').innerText = reviews[currentReview].user;
 }
+
+function simulateDiscordLogin() {
+    const btn = event.currentTarget;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> CONNECTING...';
+    
+    // Replace the '#' with your actual OAuth2 link from Step 2
+    const discordAuthUrl = "https://discord.com/oauth2/authorize?client_id=1453941722324402327&response_type=code&redirect_uri=https%3A%2F%2Fghostnet-bot.github.io%2Flogin&scope=identify+guilds";
+    
+    setTimeout(() => {
+        // In a real setup, we'd go to the URL. 
+        // For now, let's keep the dashboard redirect to keep testing!
+        localStorage.setItem('ghostnet_session', 'true');
+        window.location.href = '/dashboard';
+        
+        // When you're ready for the real deal, use this line instead:
+        // window.location.href = discordAuthUrl;
+    }, 1500);
+}
