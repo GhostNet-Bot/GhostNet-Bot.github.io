@@ -65,17 +65,24 @@
     </div>
 
     <div id="main-content">
-<div class="header">
-    <span style="font-weight: bold;">[ GHOSTNET ]</span>
+        <div class="header" style="margin: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--glow); padding-bottom: 10px;">
+    <span style="font-weight: bold; letter-spacing: 2px;">[ GHOSTNET ]</span>
     <div class="nav-links">
-        <a href="index.html">HOME</a>
-        <a href="features.html">FEATURES</a>
-        <a href="dev.html">LOGS</a>
-        <span style="color:#222; margin: 0 10px;">|</span>
-        <a href="signup.html">SIGN_UP</a>
-        <a href="login.html">LOGIN</a>
-        <a href="dashboard.html" class="highlight">DASHBOARD</a>
-        <a href="https://discord.gg/YOUR_LINK" target="_blank" style="color:#5865F2;">INVITE</a>
+        <a href="index.html" style="color: var(--glow); text-decoration: none; margin-left: 15px;">HOME</a>
+        <a href="features.html" style="color: var(--glow); text-decoration: none; margin-left: 15px;">FEATURES</a>
+        <a href="dev.html" style="color: var(--glow); text-decoration: none; margin-left: 15px;">LOGS</a>
+        
+        <span style="color: #222; margin: 0 10px;">|</span>
+        
+        <span id="guest-links">
+            <a href="signup.html" style="color: var(--glow); text-decoration: none;">SIGN_UP</a>
+            <a href="login.html" style="color: var(--glow); text-decoration: none; margin-left: 15px;">LOGIN</a>
+        </span>
+
+        <span id="user-links" style="display: none;">
+            <a href="dashboard.html" style="color: #fff; text-decoration: none; border: 1px solid var(--glow); padding: 2px 8px; background: rgba(0,255,65,0.1);">DASHBOARD</a>
+            <a href="#" onclick="logout()" style="color: #ff4444; text-decoration: none; margin-left: 15px; font-size: 10px;">[LOGOUT]</a>
+        </span>
     </div>
 </div>
 
