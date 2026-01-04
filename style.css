@@ -31,11 +31,10 @@ body::after {
 
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center; /* Keeps the brand stack and nav links aligned on their center line */
-    padding: 15px 30px;
+    justify-content: space-between; /* This pushes nav to the right */
+    align-items: center; /* Aligns them vertically */
+    padding: 20px 40px;
     border-bottom: 1px solid var(--glow);
-    background: rgba(0, 0, 0, 0.9);
 }
 
 .nav-links {
