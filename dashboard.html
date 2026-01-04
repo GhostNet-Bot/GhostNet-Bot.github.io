@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD | GHOSTNET</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/eeb01edac2.js" crossorigin="anonymous"></script>
+    <style>
+        :root { --glow: #00ff41; --bg: #050505; }
+        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
+        
+        #main-content { opacity: 0; display: none; transition: opacity 1s; }
+
+        /* DASHBOARD GRID */
+        .dash-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 120px);
+        }
+
+        .panel {
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            background: rgba(0, 255, 65, 0.02);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            font-size: 12px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        /* TERMINAL STYLE */
+        #console {
+            background: #000;
+            flex-grow: 1;
+            padding: 15px;
+            font-size: 13px;
+            overflow-y: auto;
+            border: 1px solid #111;
+        }
+
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+        .stat-label { color: #666; }
+
+        /* LOADER (Keep for consistency) */
+        #loading-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: var(--bg); z-index: 3000; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading-screen">
+        <div style="letter-spacing: 3px;">INITIALIZING_COMMAND_CENTER...</div>
+        <div style="width: 200px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px;">
+            <div id="fill" style="height: 100%; width: 0%; background: var(--glow);"></div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="dash-container">
+            <div class="panel">
+                <div class="panel-header"><i class="fas fa-server"></i> SYSTEM_HEALTH</div>
+                <div class="stat-row"><span class="stat-label">Uptime:</span> <span>99.98%</span></div>
+                <div class="stat-row"><span class="stat-label">CPU_Load:</span> <span>12%</span></div>
+                <div class="stat-row"><span class="stat-label">Active_Nodes:</span> <span>42</span></div>
+                <div class="stat-row"><span class="stat-label">Latency:</span> <span style="color: #00ff41;">14ms</span></div>
+                
+                <div class="panel-header" style="margin-top: 30px;"><i class="fas fa-shield-halved"></i> SECURITY</div>
+                <div class="stat-row"><span class="stat-label">Firewall:</span> <span style="color: #00ff41;">ACTIVE</span></div>
+                <div class="stat-row"><span class="stat-label">Threat_Level:</span> <span style="color: #666;">NULL</span></div>
+            </div>
+
+            <div class="panel" style="background: #080808;">
+                <div class="panel-header"><i class="fas fa-terminal"></i> LIVE_MAIN_FRAME</div>
+                <div id="console">
+                    <p style="color: #444;">[SYSTEM] Establish neural link...</p>
+                    <p style="color: #444;">[SYSTEM] Verification successful.</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><i class="fas fa-bolt"></i> OPERATIONS</div>
+                <button onclick="addLog('Manually refreshing nodes...')" style="background: transparent; border: 1px solid var(--glow); color: var(--glow); padding: 10px; cursor: pointer; margin-bottom: 10px;">REFRESH_NODES</button>
+                <button onclick="logout()" style="background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; color: #ff4444; padding: 10px; cursor: pointer;">LOGOUT_TERMINAL</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script>
+        // Specific script for the dashboard console
+        function addLog(text) {
+            const consoleBox = document.getElementById('console');
+            const p = document.createElement('p');
+            const time = new Date().toLocaleTimeString();
+            p.innerHTML = `<span style="color: #444;">[${time}]</span> > ${text}`;
+            consoleBox.appendChild(p);
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+
+        // Randomly add "bot activity" logs
+        const botMessages = [
+            "Scanning server permissions...",
+            "Updating global database...",
+            "Ping received from Node_04",
+            "Packet capture successful",
+            "Refreshing security certificates..."
+        ];
+
+        setInterval(() => {
+            const randomMsg = botMessages[Math.floor(Math.random() * botMessages.length)];
+            addLog(randomMsg);
+        }, 4000);
+    </script>
+</body>
+</html>
