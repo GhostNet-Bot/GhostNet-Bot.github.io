@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loading-screen');
     const content = document.getElementById('main-content');
+
+    // Make sure this is at the VERY TOP of script.js
+document.addEventListener('DOMContentLoaded', () => {
+    updateBotStatus(); // Start the check
+});
+
     
     // 1. Loading Screen Logic
     // FORCE SHOW for testing: change to 'false' if you want it to skip after first time
