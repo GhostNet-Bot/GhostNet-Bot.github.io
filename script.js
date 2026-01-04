@@ -6,12 +6,29 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBotStatus();
     setInterval(updateBotStatus, 30000);
 
-    // 2. Loading Screen Logic (Now runs EVERY time)
-    if (loader && content) {
-        // Ensure content is hidden initially while loader runs
-        content.style.display = 'none';
-        content.style.opacity = '0';
-        startBoot();
+    // 2. SMART LOADING LOGIC
+    // Detect if the page was reloaded
+    const navEntries = performance.getEntriesByType("navigation");
+    const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
+    
+    // Detect if this is the first time they've ever seen the loader this session
+    const isFirstVisit = !sessionStorage.getItem('session_started');
+
+    if (isReload || isFirstVisit) {
+        // Show the boot sequence for reloads or first-time entries
+        sessionStorage.setItem('session_started', 'true');
+        if (loader && content) {
+            content.style.display = 'none';
+            content.style.opacity = '0';
+            startBoot();
+        }
+    } else {
+        // Instant load for normal link clicks
+        if(loader) loader.style.display = 'none';
+        if(content) {
+            content.style.display = 'block';
+            content.style.opacity = '1';
+        }
     }
 });
 
