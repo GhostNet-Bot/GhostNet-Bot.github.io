@@ -68,27 +68,26 @@
     </div>
 
     <div id="main-content">
-        <div class="header">
-            <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                <spam style="font-weight: bold; letter-spacing: 2px; font-size: 1.2rem;">[ GHOSTNET ]</span>
-
-                 <div id="status-container" style="margin-top: 5px; display: flex; align-items: center; font-size: 9px; opacity: 0.8;">
-                     <span id="status-text" style="color: #444; letter-spacing: 1px;">CHECKING_LINK...</span></div>
-
-            <div class="nav-links">
-                <a href="/">HOME</a>
-                <a href="/features">FEATURES</a>
-                <a href="/dev">LOGS</a>
-                <span style="color: #222; margin: 0 10px;">|</span>
-                <span id="guest-links">
-                    <a href="/login">LOGIN</a>
-                    <a href="/signup">SIGN_UP</a>
-                </span>
-                <span id="user-links" style="display: none;">
-                    <a href="/dashboard">DASHBOARD</a>
-                    <a href="/logout" onclick="logout()" style="color:#ff4444" text-decoration: none; margin-left: 15px; font-size: 10px;"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-                </span>
+<header class="header">
+    <div style="display: flex; flex-direction: column;">
+        <span style="font-weight: bold; letter-spacing: 2px;">[ GHOSTNET ]</span>
+        <div id="status-container" style="display: flex; align-items: center; margin-top: 5px;">
+            <span id="status-dot" style="height: 6px; width: 6px; background: #444; border-radius: 50%; margin-right: 8px;"></span>
+            <span id="status-text" style="font-size: 9px; color: #444;">CHECKING_LINK...</span>
+        </div>
     </div>
+
+    <nav class="nav-links">
+        <a href="/">HOME</a>
+        <a href="/features">FEATURES</a>
+        <a href="/dev">LOGS</a>
+        <span style="color: #222; margin: 0 10px;">|</span>
+        <span id="guest-links">
+            <a href="/login"><i class="fa-solid fa-arrow-right-to-bracket"></i> LOGIN</a>
+            <a href="/signup"><i class="fa-solid fa-user-plus"></i> SIGN_UP</a>
+        </span>
+    </nav>
+</header>
 
         <section class="hero">
             <h1>It's time to protect your server.</h1>
