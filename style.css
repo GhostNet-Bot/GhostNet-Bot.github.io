@@ -96,3 +96,19 @@ body::after {
     box-shadow: 0 0 10px #ff4444;
 }
 
+.card {
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: crosshair;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #ffffff; /* Turns white briefly on hover */
+    background: rgba(0, 255, 65, 0.08);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.card:hover h3 {
+    text-shadow: 0 0 10px var(--glow);
+    color: #fff;
+}
