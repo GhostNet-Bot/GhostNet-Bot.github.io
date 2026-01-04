@@ -25,10 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Smart Loading Logic
     const navEntries = performance.getEntriesByType("navigation");
-    const isReload = navEntries.length > 0 && navEntries[0].type === 'reload';
+    const navType = navEntries.length > 0 ? navEntries[0].type : "";
+    
+    // It's a fresh visit if there is no session flag
     const isFirstVisit = !sessionStorage.getItem('session_started');
+    // It's a reload if they hit the refresh button
+    const isReload = navType === 'reload';
 
-    if (isReload || isFirstVisit) {
+    if (isFirstVisit || isReload) {
+        console.log("FRESH_VISIT_DETECTED: INITIALIZING_BOOT_SEQUENCE");
         sessionStorage.setItem('session_started', 'true');
         if (loader && content) {
             content.style.display = 'none';
@@ -36,12 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
             startBoot();
         }
     } else {
+        console.log("INTERNAL_NAV_DETECTED: BYPASSING_BOOT");
         if(loader) loader.style.display = 'none';
         if(content) {
             content.style.display = 'block';
             content.style.opacity = '1';
         }
     }
+
 
     // 4. Update Header Buttons based on Session
     updateHeaderUI();
