@@ -82,3 +82,19 @@ function finishLoading() {
         }
     }, 500);
 }
+
+const reviews = [
+    { text: '"The infection system is terrifyingly efficient. Isaac never saw it coming."', user: "- Staff_Member_X" },
+    { text: '"The most aesthetic bot interface I have ever used. Total immersion."', user: "- Neural_Link_7" },
+    { text: '"GhostNet simplified our server security protocols overnight. Essential."', user: "- Root_Admin" }
+];
+let currentReview = 0;
+
+function moveReview(dir) {
+    currentReview += dir;
+    if (currentReview < 0) currentReview = reviews.length - 1;
+    if (currentReview >= reviews.length) currentReview = 0;
+    
+    document.getElementById('review-text').innerText = reviews[currentReview].text;
+    document.getElementById('review-user').innerText = reviews[currentReview].user;
+}
