@@ -94,7 +94,6 @@
         <span style="color: #222; margin: 0 10px;">|</span>
         <span id="guest-links">
             <a href="/login"><i class="fa-solid fa-arrow-right-to-bracket"></i> LOGIN</a>
-            <a href="/signup"><i class="fa-solid fa-user-plus"></i> SIGN_UP</a>
         </span>
     </nav>
 </header>
@@ -154,7 +153,7 @@
 
         <!--Review section-->
         <section style="padding: 80px 20px; background: rgba(0,255,65,0.02); border-bottom: 1px solid rgba(0,255,65,0.1);">
-    <h2 style="text-align: center; margin-bottom: 40px; letter-spacing: 3px;">USER_FEEDBACK_LOOPS</h2>
+    <h2 style="text-align: center; margin-bottom: 40px; letter-spacing: 3px;">USER_FEEDBACK</h2>
     
     <div style="display: flex; align-items: center; justify-content: center; gap: 30px;">
         <i class="fas fa-chevron-left" onclick="moveReview(-1)" style="cursor: pointer; color: var(--glow); font-size: 24px;"></i>
@@ -178,12 +177,16 @@
     <p style="color: #666; margin-bottom: 40px; font-size: 14px;">Establish your connection to the mainframe and begin deployment.</p>
     
     <div style="display: flex; justify-content: center; gap: 20px;">
-        <a href="signup.html" style="background: var(--glow); color: #000; padding: 18px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px; transition: 0.3s;" onmouseover="this.style.boxShadow='0 0 20px var(--glow)'" onmouseout="this.style.boxShadow='none'">
-            <i class="fas fa-user-plus"></i> SIGN_UP
+        <a href="/login" style="background: var(--glow); color: #000; padding: 18px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px; transition: 0.3s;" onmouseover="this.style.boxShadow='0 0 20px var(--glow)'" onmouseout="this.style.boxShadow='none'">
+            <!--<i class="fas fa-user-plus"></i>--><!--<i class="fas fa-sign-in-alt"></i>-->
+            
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> 
+            <!--SIGN_UP-->
+            LOGIN
         </a>
-        <a href="login.html" style="border: 1px solid var(--glow); color: var(--glow); padding: 18px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px;">
+        <!--<a href="login.html" style="border: 1px solid var(--glow); color: var(--glow); padding: 18px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px;">
             <i class="fas fa-sign-in-alt"></i> LOGIN
-        </a>
+        </a>-->
     </div>
 </section>
 
