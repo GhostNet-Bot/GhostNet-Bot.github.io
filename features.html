@@ -6,108 +6,80 @@
     <title>FEATURES | GHOSTNET</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        :root { 
-            --glow: #00ff41;
-            --bg: #050505;
-        }
+        :root { --glow: #00ff41; --bg: #050505; }
+        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; }
         
-        body {
-            background-color: var(--bg); 
-            color: var(--glow); 
-            font-family: 'Courier New', monospace; 
-            margin: 0; 
-        }
-        
-        .command-table { 
-            width: 100%; 
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        
-        .command-table th { 
-            text-align: left;
-            border-bottom: 1px solid var(--glow);
-            padding: 10px; 
-            color: #fff;
-        }
-        
-        .command-table td { 
-            padding: 15px 10px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
-            font-size: 14px; 
-        }
-        
-        .cmd-name { 
-            color: var(--glow); 
-            font-weight: bold;
-        }
+        /* Hide content initially so the script can fade it in */
+        #main-content { display: none; opacity: 0; transition: opacity 1s; }
+
+        .command-table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 40px; }
+        .command-table th { text-align: left; border-bottom: 1px solid var(--glow); padding: 10px; color: #fff; }
+        .command-table td { padding: 15px 10px; border-bottom: 1px solid rgba(0, 255, 65, 0.1); font-size: 14px; }
+        .cmd-name { color: var(--glow); font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="header" style="margin: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--glow); padding-bottom: 10px;">
-        <span style="font-weight: bold;">[ GHOSTNET ]</span>
-        <div class="nav-links">
-            <a href="index.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">HOME</a>
-            <a href="features.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">FEATURES</a>
-            <a href="dev.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">LOGS</a>
+
+    <div id="loading-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg); z-index:3000; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <div style="letter-spacing: 3px;">ACCESSING MODULES...</div>
+        <div style="width:200px; height:2px; background:#111; border:1px solid var(--glow); margin-top:20px;">
+            <div id="fill" style="height:100%; width:0%; background:var(--glow);"></div>
         </div>
+        <div id="status" style="font-size: 12px; margin-top: 10px; color: #444;">Syncing...</div>
     </div>
 
-    <div style="padding: 20px; max-width: 900px; margin: auto;">
-        <h1 style="border-left: 4px solid var(--glow); padding-left: 15px;">SYSTEM MODULES</h1>
-        <p style="color: #888;">Complete directory of available GhostNet commands and automation protocols.</p>
+    <div id="main-content">
+        <div class="header" style="margin: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--glow); padding-bottom: 10px;">
+            <span style="font-weight: bold;">[ GHOSTNET ]</span>
+            <div class="nav-links">
+                <a href="index.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">HOME</a>
+                <a href="features.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">FEATURES</a>
+                <a href="dev.html" style="color: var(--glow); text-decoration: none; margin-left: 20px;">LOGS</a>
+            </div>
+        </div>
 
-        <table class="command-table">
-            <thead>
-                <tr>
-                    <th>COMMAND</th>
-                    <th>DESCRIPTION</th>
-                    <th>PERMISSION</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="cmd-name">!welcome-setup</td>
-                    <td>Starts the interactive wizard to set greeting messages and channels.</td>
-                    <td style="color: #ff4444;">Admin</td>
-                </tr>
-                <tr>
-                    <td class="cmd-name">!autoroles</td>
-                    <td>Configure up to 5 roles to be assigned automatically to new users.</td>
-                    <td style="color: #ff4444;">Admin</td>
-                </tr>
-                <tr>
-                    <td class="cmd-name">!ping</td>
-                    <td>Check connection latency between the mainframe and Discord.</td>
-                    <td>User</td>
-                </tr>
-                <tr>
-                    <td class="cmd-name">!help</td>
-                    <td>Displays the command directory within the Discord interface.</td>
-                    <td>User</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="padding: 20px; max-width: 900px; margin: auto;">
+            <h1 style="border-left: 4px solid var(--glow); padding-left: 15px;">SYSTEM MODULES</h1>
+            <p style="color: #888;">Complete directory of available GhostNet commands and automation protocols.</p>
+
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>COMMAND</th>
+                        <th>DESCRIPTION</th>
+                        <th>PERMISSION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="cmd-name">!welcome-setup</td><td>Starts the interactive wizard.</td><td style="color: #ff4444;">Admin</td></tr>
+                    <tr><td class="cmd-name">!autoroles</td><td>Configure auto-assignment.</td><td style="color: #ff4444;">Admin</td></tr>
+                    <tr><td class="cmd-name">!ping</td><td>Check latency.</td><td>User</td></tr>
+                    <tr><td class="cmd-name">!help</td><td>Displays directory.</td><td>User</td></tr>
+                </tbody>
+            </table>
+
+            <h2 style="color: #fff; margin-top: 50px;">Specialized Subroutines</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>☣️ Bioware Module</h3>
+                    <p>Administrators can deploy pathogens to track and haunt specific users with 100% reaction accuracy.</p>
+                </div>
+                <div class="card">
+                    <h3>🛡️ Lockdown Protocol</h3>
+                    <p>Instant channel muting system to prevent chat floods or unauthorized data transmission.</p>
+                </div>
+                <div class="card">
+                    <h3>📜 Deep Scan</h3>
+                    <p>The !system-logs command retrieves metadata and "intercepted" searches from targets.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 40px; color: #333; font-size: 12px; border-top: 1px solid #111; margin-top: 50px;">
+            GHOSTNET PROJECT | 2026 | ALL RIGHTS RESERVED
+        </footer>
     </div>
 
-    <div class="grid">
-    <div class="card">
-        <h3>☣️ Bioware Module</h3>
-        <p>Administrators can deploy pathogens to track and haunt specific users with 100% reaction accuracy.</p>
-    </div>
-    
-    <div class="card">
-        <h3>🛡️ Lockdown Protocol</h3>
-        <p>Instant channel muting system to prevent chat floods or unauthorized data transmission.</p>
-    </div>
-
-    <div class="card">
-        <h3>📜 Deep Scan</h3>
-        <p>The !system-logs command retrieves metadata and "intercepted" searches from targets.</p>
-    </div>
-</div>
-
-<script src="script.js" defer></script>
-
+    <script src="script.js" defer></script>
 </body>
 </html>
