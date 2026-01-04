@@ -1,15 +1,13 @@
+// SINGLE LISTENER TO START EVERYTHING
 document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loading-screen');
     const content = document.getElementById('main-content');
 
-    // Make sure this is at the VERY TOP of script.js
-document.addEventListener('DOMContentLoaded', () => {
-    updateBotStatus(); // Start the check
-});
+    // 1. Initial Status Check
+    updateBotStatus();
+    setInterval(updateBotStatus, 30000);
 
-    
-    // 1. Loading Screen Logic
-    // FORCE SHOW for testing: change to 'false' if you want it to skip after first time
+    // 2. Loading Screen Logic
     if (sessionStorage.getItem('booted')) {
         if(loader) loader.style.display = 'none';
         if(content) {
@@ -19,19 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         startBoot();
     }
-
-    // 2. Run Status Check
-    updateBotStatus();
-    setInterval(updateBotStatus, 30000);
 });
 
+// STATUS UPDATE LOGIC
 async function updateBotStatus() {
     const dot = document.getElementById('status-dot');
     const text = document.getElementById('status-text');
     if (!dot || !text) return;
 
     try {
-        // Use a timeout so it doesn't hang forever
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
 
@@ -53,9 +47,9 @@ async function updateBotStatus() {
     }
 }
 
+// BOOT SEQUENCE LOGIC
 function startBoot() {
     const fill = document.getElementById('fill');
-    const loadText = document.getElementById('status'); // The text inside the loader
     let w = 0;
     
     const interval = setInterval(() => {
@@ -83,6 +77,7 @@ function finishLoading() {
     }, 500);
 }
 
+// REVIEW SLIDER LOGIC
 const reviews = [
     { text: '"The infection system is terrifyingly efficient. Isaac never saw it coming."', user: "- Staff_Member_X" },
     { text: '"The most aesthetic bot interface I have ever used. Total immersion."', user: "- Neural_Link_7" },
