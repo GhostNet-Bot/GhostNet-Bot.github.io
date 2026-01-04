@@ -1,4 +1,3 @@
-// SINGLE LISTENER TO START EVERYTHING
 document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loading-screen');
     const content = document.getElementById('main-content');
@@ -7,14 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBotStatus();
     setInterval(updateBotStatus, 30000);
 
-    // 2. Loading Screen Logic
-    if (sessionStorage.getItem('booted')) {
-        if(loader) loader.style.display = 'none';
-        if(content) {
-            content.style.display = 'block';
-            content.style.opacity = '1';
-        }
-    } else {
+    // 2. Loading Screen Logic (Now runs EVERY time)
+    if (loader && content) {
+        // Ensure content is hidden initially while loader runs
+        content.style.display = 'none';
+        content.style.opacity = '0';
         startBoot();
     }
 });
