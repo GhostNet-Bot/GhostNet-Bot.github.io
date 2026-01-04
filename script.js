@@ -71,3 +71,32 @@ document.addEventListener('DOMContentLoaded', initPage);
             f.style.width = w + '%';
             s.innerText = msgs[Math.floor(w/30)] || "Complete";
         }, 300);
+
+// Add this to your existing script.js
+
+function checkAuth() {
+    const isLoggedIn = localStorage.getItem('ghostnet_session');
+    const guestLinks = document.getElementById('guest-links');
+    const userLinks = document.getElementById('user-links');
+
+    if (isLoggedIn === 'true') {
+        if (guestLinks) guestLinks.style.display = 'none';
+        if (userLinks) userLinks.style.display = 'inline';
+    } else {
+        if (guestLinks) guestLinks.style.display = 'inline';
+        if (userLinks) userLinks.style.display = 'none';
+    }
+}
+
+function logout() {
+    localStorage.removeItem('ghostnet_session');
+    // Redirect to home after logout
+    window.location.href = 'index.html'; 
+}
+
+// Update your initPage function to call checkAuth()
+// Example:
+// function initPage() {
+//    ... existing logic ...
+//    checkAuth();
+// }
