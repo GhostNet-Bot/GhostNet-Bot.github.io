@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT | GHOSTNET</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/eeb01edac2.js" crossorigin="anonymous"></script>
+    <style>
+        :root { --glow: #00ff41; --bg: #050505; }
+        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; }
+        #main-content { opacity: 0; display: none; transition: opacity 1s; }
+        
+        .lore-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .terminal-block {
+            background: rgba(0, 255, 65, 0.03);
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            padding: 30px;
+            border-left: 4px solid var(--glow);
+            margin-bottom: 40px;
+        }
+
+        .highlight { color: #fff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div id="loading-screen">
+        <div style="letter-spacing: 3px;">FETCHING_HISTORY...</div>
+        <div style="width: 200px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px;">
+            <div id="fill" style="height: 100%; width: 0%; background: var(--glow);"></div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="lore-container">
+            <h1 style="letter-spacing: 5px; border-bottom: 1px solid var(--glow); padding-bottom: 10px;">PROJECT_STORY</h1>
+            
+            <div class="terminal-block">
+                <p><span class="highlight">> SOURCE:</span> NothingButTyler (the owner)</p>
+                <p><span class="highlight">> SUBJECT:</span> The Isaac Incident (Revenge Protocol)</p>
+                <p><span class="highlight">> STATUS:</span> Deployed</p>
+            </div>
+
+            <p>
+                GhostNet wasn't born in a corporate office—it was forged for <span class="highlight">Revenge</span>. 
+                After a psychological operation by <span class="highlight">IsaacTheMan67</span>, who tricked the developer into believing a 24-year-old intruder had breached his system, a counter-strike was necessary.
+            </p>
+
+            <p>
+                The developer, <span class="highlight">NothingButTyler</span>, responded by creating a simulated "Dark Net" environment. 
+                GhostNet was the centerpiece: a bot designed to mimic hacking, raiding, and system infiltration. 
+                What started as a sophisticated prank involving fake welcome logs and "hacker" messages has evolved into a fully-functional utility suite.
+            </p>
+
+            <div class="terminal-block">
+                <h3 style="margin-top: 0;"><i class="fas fa-microchip"></i> CURRENT_EVOLUTION</h3>
+                <p>Today, GhostNet has transcended its origins. It is no longer just a "fake" raiding tool; it is an immersive Discord experience. While it retains its aesthetic of "hacking," it now provides real-world security, automation, and surveillance for server owners who want their community to feel like a high-security mainframe.</p>
+            </div>
+
+            <p style="color: #666; font-style: italic;">
+                "More than a bot. A legacy of a prank taken to the extreme."
+            </p>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="index.html" style="color: var(--glow); text-decoration: none; border: 1px solid var(--glow); padding: 10px 20px;">[ RETURN_TO_HOME ]</a>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 40px; color: #333; font-size: 12px;">
+            GHOSTNET PROJECT | 2026
+        </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
