@@ -100,3 +100,33 @@ function logout() {
 //    ... existing logic ...
 //    checkAuth();
 // }
+
+async function updateBotStatus() {
+    const dot = document.getElementById('status-dot');
+    const text = document.getElementById('status-text');
+    const botUrl = 'https://ghostnet-0p4u.onrender.com';
+
+    try {
+        // We use mode: 'no-cors' because we just want to see if the server responds
+        const response = await fetch(botUrl, { mode: 'no-cors' });
+        
+        // If we get here, the server is reachable
+        dot.style.background = '#00ff41';
+        dot.style.boxShadow = '0 0 8px #00ff41';
+        text.style.color = '#00ff41';
+        text.innerText = 'SYSTEM_ONLINE';
+    } catch (error) {
+        // If the fetch fails, the bot is down
+        dot.style.background = '#ff4444';
+        dot.style.boxShadow = '0 0 8px #ff4444';
+        text.style.color = '#ff4444';
+        text.innerText = 'SYSTEM_OFFLINE';
+    }
+}
+
+// Run it when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    updateBotStatus();
+    // Re-check every 30 seconds to keep it "Live"
+    setInterval(updateBotStatus, 30000); 
+});
