@@ -3,162 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DASHBOARD | GHOSTNET</title>
+    <title>GHOSTNET | COMMAND CENTER</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/eeb01edac2.js" crossorigin="anonymous"></script>
     <style>
-        :root { --glow: #00ff41; --bg: #050505; }
-        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
+        :root { --glow: #00ff41; --bg: #0b0b0b; --sidebar: #121212; --panel: #181818; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
         
-        #main-content { opacity: 0; display: none; transition: opacity 1s; }
+        /* SIDEBAR (Welcomer Style) */
+        .sidebar { width: 260px; background: var(--sidebar); border-right: 1px solid #222; display: flex; flex-direction: column; padding: 20px 0; shrink: 0; }
+        .sidebar-brand { padding: 0 25px 20px; font-weight: bold; color: var(--glow); letter-spacing: 2px; border-bottom: 1px solid #222; margin-bottom: 20px; }
+        .nav-item { padding: 12px 25px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 15px; font-size: 14px; transition: 0.2s; cursor: pointer; }
+        .nav-item:hover { background: rgba(0,255,65,0.05); color: var(--glow); }
+        .nav-item.active { background: rgba(0,255,65,0.1); color: var(--glow); border-right: 3px solid var(--glow); }
+        .nav-item i { width: 20px; text-align: center; }
 
-        /* HEADER & DROPDOWN */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; border-bottom: 1px solid rgba(0,255,65,0.1); background: #000; }
-        .dropdown-menu { display: none; position: absolute; right: 0; top: 120%; background: #080808; border: 1px solid var(--glow); min-width: 200px; z-index: 5000; box-shadow: 0 10px 30px #000; }
-        .dropdown-menu a { display: block; padding: 12px; color: #ccc; text-decoration: none; font-size: 12px; border-bottom: 1px solid #111; transition: 0.3s; }
-        .dropdown-menu a:hover { background: rgba(0,255,65,0.05); color: var(--glow); }
+        /* MAIN CONTENT AREA */
+        .main-wrapper { flex-grow: 1; display: flex; flex-direction: column; }
+        .top-bar { height: 70px; background: var(--sidebar); border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: flex-end; padding: 0 30px; gap: 20px; }
+        
+        .content-body { padding: 30px; overflow-y: auto; flex-grow: 1; }
+        
+        /* MODULE CARDS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .panel { background: var(--panel); border: 1px solid #222; border-radius: 8px; padding: 25px; }
+        .panel-header { font-size: 16px; font-weight: bold; margin-bottom: 20px; color: var(--glow); display: flex; align-items: center; gap: 10px; }
+        
+        input, select, textarea { width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 4px; margin-top: 10px; font-family: 'Courier New'; }
+        button { background: var(--glow); color: #000; border: none; padding: 12px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 15px; transition: 0.3s; width: 100%; }
+        button:hover { filter: brightness(1.2); box-shadow: 0 0 15px rgba(0,255,65,0.3); }
 
-        /* DASHBOARD GRID */
-        .dash-container {
-            display: grid;
-            grid-template-columns: 300px 1fr 300px;
-            gap: 20px;
-            padding: 20px;
-            height: calc(100vh - 100px);
-        }
-
-        .panel {
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            background: rgba(0, 255, 65, 0.02);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .panel-header { font-size: 12px; text-transform: uppercase; border-bottom: 1px solid rgba(0, 255, 65, 0.2); padding-bottom: 10px; margin-bottom: 15px; color: #fff; letter-spacing: 2px; }
-
-        /* TERMINAL STYLE */
-        #console { background: #000; flex-grow: 1; padding: 15px; font-size: 12px; overflow-y: auto; border: 1px solid #111; line-height: 1.5; }
-
-        .stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
-        .stat-label { color: #666; }
-
-        /* CONFIG CARDS */
-        .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .config-card { border: 1px solid #222; padding: 15px; background: rgba(255,255,255,0.01); }
-
-        /* LOADER */
-        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 6000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .bar { width: 200px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px; }
+        /* LOADING SCREEN */
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .bar { width: 250px; height: 4px; background: #111; border-radius: 10px; margin-top: 20px; overflow: hidden; }
         .fill { height: 100%; width: 0%; background: var(--glow); transition: width 0.05s linear; }
 
-        @media (max-width: 1100px) { .dash-container { grid-template-columns: 1fr; height: auto; } .panel { height: 400px; } }
+        /* DROPDOWN */
+        .dropdown { position: relative; }
+        .dropdown-menu { display: none; position: absolute; right: 0; top: 120%; background: var(--panel); border: 1px solid #333; min-width: 180px; border-radius: 4px; z-index: 100; }
+        .dropdown-menu a { display: block; padding: 12px; color: #ccc; text-decoration: none; font-size: 13px; }
+        .dropdown-menu a:hover { background: #222; color: var(--glow); }
     </style>
 </head>
 <body>
 
     <div id="loading-screen">
-        <div style="letter-spacing: 3px;">ACCESSING_SECURE_NODE...</div>
+        <div style="color: var(--glow); letter-spacing: 5px; font-family: 'Courier New';">GHOSTNET_OS_BOOTING...</div>
         <div class="bar"><div id="fill" class="fill"></div></div>
     </div>
 
-    <div id="main-content">
-        <header class="header">
-            <div style="font-weight: bold; letter-spacing: 2px; color: var(--glow);">[ GHOSTNET_DASH ]</div>
-            
-            <nav style="display: flex; align-items: center; gap: 20px;">
-                <a href="/" style="color: #666; text-decoration: none; font-size: 12px;">HOME</a>
-                
-                <div style="position: relative;">
-                    <div id="profile-trigger" style="display: flex; align-items: center; gap: 10px; cursor: pointer; border: 1px solid #222; padding: 5px 12px; background: #000;">
-                        <img id="user-avatar" src="https://i.imgur.com/6VBx3io.png" style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--glow);">
-                        <span id="user-name" style="font-size: 12px; color: #fff;">OPERATOR_01</span>
-                        <i class="fas fa-chevron-down" style="font-size: 10px; color: #444;"></i>
-                    </div>
-                    
-                    <div id="dropdown-menu" class="dropdown-menu">
-                        <a href="#"><i class="fas fa-book"></i> DOCUMENTATION</a>
-                        <a href="https://discord.gg/yourserver" target="_blank"><i class="fab fa-discord"></i> SUPPORT_SERVER</a>
-                        <a href="#" onclick="logout()" style="color: #ff4444;"><i class="fas fa-power-off"></i> DISCONNECT</a>
-                    </div>
+    <div class="sidebar">
+        <div class="sidebar-brand">GHOSTNET_V2</div>
+        <div class="nav-item active"><i class="fas fa-th-large"></i> Server Overview</div>
+        <div class="nav-item"><i class="fas fa-cog"></i> Bot Settings</div>
+        <div class="nav-item"><i class="fas fa-bullhorn"></i> Welcomer</div>
+        <div class="nav-item"><i class="fas fa-user-shield"></i> AutoRoles</div>
+        <div class="nav-item"><i class="fas fa-terminal"></i> System Logs</div>
+        <div style="margin-top: auto;">
+            <a href="https://discord.gg/yourlink" target="_blank" class="nav-item"><i class="fab fa-discord"></i> Support Server</a>
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <a href="/" style="color: #666; text-decoration: none; font-size: 14px;">Home</a>
+            <div class="dropdown">
+                <div id="profile-trigger" style="display: flex; align-items: center; gap: 10px; cursor: pointer; background: #1a1a1a; padding: 8px 15px; border-radius: 20px;">
+                    <img id="user-avatar" src="https://i.imgur.com/6VBx3io.png" style="width: 25px; height: 25px; border-radius: 50%;">
+                    <span id="user-name" style="font-size: 13px;">OPERATOR_01</span>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
                 </div>
-            </nav>
+                <div id="dropdown-menu" class="dropdown-menu">
+                    <a href="#">Documentation</a>
+                    <a href="#" onclick="logout()" style="color: #ff4444;">Disconnect</a>
+                </div>
+            </div>
         </header>
 
-        <div class="dash-container">
-            <div class="panel">
-                <div class="panel-header"><i class="fas fa-microchip"></i> SYSTEM_HEALTH</div>
-                <div class="stat-row"><span class="stat-label">Uptime:</span> <span>99.9%</span></div>
-                <div class="stat-row"><span class="stat-label">CPU:</span> <span>08%</span></div>
-                <div class="stat-row"><span class="stat-label">Nodes:</span> <span>12</span></div>
-                <div class="stat-row"><span class="stat-label">Ping:</span> <span style="color: var(--glow);">12ms</span></div>
-            </div>
-
-            <div class="panel" style="background: #080808; overflow-y: auto;">
-                <div class="panel-header"><i class="fas fa-sliders-h"></i> CONFIGURATION</div>
-                <div style="margin-bottom: 20px;">
-                    <label style="font-size: 10px; color: #444;">TARGET_GUILD:</label>
-                    <select style="width: 100%; background: #000; color: var(--glow); border: 1px solid #222; padding: 10px; margin-top: 5px; font-family: 'Courier New';">
-                        <option>MAIN_SERVER_HQ</option>
-                        <option>TEST_ENVIRONMENT</option>
-                    </select>
+        <main class="content-body">
+            <div class="grid">
+                <div class="panel">
+                    <div class="panel-header"><i class="fas fa-bullhorn"></i> Welcomer Protocol</div>
+                    <p style="font-size: 12px; color: #777;">Set the message new connections receive.</p>
+                    <textarea id="welcome-text" rows="3" placeholder="Welcome to the terminal, {user}..."></textarea>
+                    <button onclick="updateWelcome()">SAVE_PROTOCOL</button>
                 </div>
 
-                <div class="config-grid">
-                    <div class="config-card">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 12px; font-weight: bold;">WELCOME_SYS</span>
-                            <input type="checkbox" checked>
-                        </div>
-                        <input type="text" placeholder="Custom message..." style="width: 100%; background: #000; border: 1px solid #222; color: var(--glow); margin-top: 10px; padding: 5px; font-size: 11px;">
+                <div class="panel">
+                    <div class="panel-header"><i class="fas fa-satellite-dish"></i> System Broadcast</div>
+                    <p style="font-size: 12px; color: #777;">Send an official announcement to the server.</p>
+                    <input type="text" id="broadcast-msg" placeholder="Enter transmission...">
+                    <button onclick="sendBroadcast()" style="background: transparent; border: 1px solid var(--glow); color: var(--glow);">SEND_SIGNAL</button>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header"><i class="fas fa-heartbeat"></i> AI_CORE_STATUS</div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #555;">Gemini_Neural_Link:</span>
+                        <span style="color: var(--glow);">CONNECTED</span>
                     </div>
-                    <div class="config-card">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 12px; font-weight: bold;">SURVEILLANCE</span>
-                            <input type="checkbox" checked>
-                        </div>
-                        <p style="font-size: 10px; color: #444; margin-top: 5px;">Log all deletions.</p>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #555;">Latency:</span>
+                        <span style="color: var(--glow);">14ms</span>
                     </div>
+                    <button onclick="location.reload()" style="background: #222; color: #666; font-size: 10px; margin-top: 25px;">HARD_REFRESH</button>
                 </div>
             </div>
-
-            <div class="panel">
-                <div class="panel-header"><i class="fas fa-terminal"></i> LIVE_SESSION</div>
-                <div id="console">
-                    <p style="color: #444;">[INFO] System initialized...</p>
-                </div>
-                <button onclick="logout()" style="margin-top: 15px; background: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; color: #ff4444; padding: 10px; cursor: pointer; font-family: 'Courier New';">POWER_OFF</button>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script src="script.js" defer></script>
     <script>
-        // Dropdown Logic
+        // REPLACE WITH YOUR ACTUAL BOT URL FROM RENDER
+        const BOT_API = "https://your-bot-name.onrender.com";
+
+        async function updateWelcome() {
+            const msg = document.getElementById('welcome-text').value;
+            try {
+                await fetch(`${BOT_API}/update-welcome`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ message: msg })
+                });
+                alert("PROTOCOL_SYNCED");
+            } catch (e) { alert("SYNC_FAILED: Core Offline"); }
+        }
+
+        async function sendBroadcast() {
+            const msg = document.getElementById('broadcast-msg').value;
+            try {
+                await fetch(`${BOT_API}/broadcast`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ message: msg })
+                });
+                document.getElementById('broadcast-msg').value = "";
+                alert("SIGNAL_TRANSMITTED");
+            } catch (e) { alert("TRANSMISSION_FAILED"); }
+        }
+
+        // Profile & Dropdown
         const trigger = document.getElementById('profile-trigger');
         const menu = document.getElementById('dropdown-menu');
-        
         trigger.addEventListener('click', (e) => {
             e.stopPropagation();
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         });
-
-        document.addEventListener('click', () => { menu.style.display = 'none'; });
-
-        // Terminal Logic
-        function addLog(text) {
-            const consoleBox = document.getElementById('console');
-            const p = document.createElement('p');
-            p.innerHTML = `<span style="color: #444;">[${new Date().toLocaleTimeString()}]</span> > ${text}`;
-            consoleBox.appendChild(p);
-            consoleBox.scrollTop = consoleBox.scrollHeight;
-        }
-
-        setInterval(() => {
-            const msgs = ["Packet captured.", "Syncing database...", "Heartbeat sent.", "Node stable."];
-            addLog(msgs[Math.floor(Math.random() * msgs.length)]);
-        }, 6000);
+        document.addEventListener('click', () => menu.style.display = 'none');
     </script>
 </body>
 </html>
