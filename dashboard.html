@@ -114,42 +114,47 @@
 
     <script src="script.js" defer></script>
     <script>
-        // REPLACE WITH YOUR ACTUAL BOT URL FROM RENDER
-        const BOT_API = "https://your-bot-name.onrender.com";
+        const BOT_API = "https://ghostnet-0p4u.onrender.com"; 
 
-        async function updateWelcome() {
-            const msg = document.getElementById('welcome-text').value;
-            try {
-                await fetch(`${BOT_API}/update-welcome`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ message: msg })
-                });
-                alert("PROTOCOL_SYNCED");
-            } catch (e) { alert("SYNC_FAILED: Core Offline"); }
+async function handleDiscordLogin() {
+    // Start bar moving immediately
+    const fill = document.getElementById('fill-bar');
+    let width = 0;
+    const interval = setInterval(() => {
+        if (width < 90) {
+            width += 2;
+            fill.style.width = width + '%';
         }
+    }, 100);
 
-        async function sendBroadcast() {
-            const msg = document.getElementById('broadcast-msg').value;
-            try {
-                await fetch(`${BOT_API}/broadcast`, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ message: msg })
-                });
-                document.getElementById('broadcast-msg').value = "";
-                alert("SIGNAL_TRANSMITTED");
-            } catch (e) { alert("TRANSMISSION_FAILED"); }
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
 
-        // Profile & Dropdown
-        const trigger = document.getElementById('profile-trigger');
-        const menu = document.getElementById('dropdown-menu');
-        trigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        });
-        document.addEventListener('click', () => menu.style.display = 'none');
+    if (code) {
+        try {
+            const response = await fetch(`${BOT_API}/login-callback?code=${code}`);
+            const userData = await response.json();
+            if (userData.username) {
+                localStorage.setItem('discord_user_name', userData.username);
+                localStorage.setItem('discord_user_avatar', `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`);
+            }
+        } catch (err) { console.log("Offline Mode"); }
+    }
+
+    // Force finish and hide loading screen
+    clearInterval(interval);
+    fill.style.width = '100%';
+    setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+        const name = localStorage.getItem('discord_user_name');
+        const avatar = localStorage.getItem('discord_user_avatar');
+        if(name) document.getElementById('user-name').innerText = name;
+        if(avatar) document.getElementById('user-avatar').src = avatar;
+    }, 500);
+}
+
+document.addEventListener('DOMContentLoaded', handleDiscordLogin);
+
     </script>
 </body>
 </html>
