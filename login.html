@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME | GHOSTNET</title>
-    <link rel="stylesheet" href="style.css">
-    <!--fa-->
     <script src="https://kit.fontawesome.com/eeb01edac2.js" crossorigin="anonymous"></script>
-    <!--end of fa-->
     <style>
         :root { --glow: #00ff41; --bg: #050505; }
         
-        body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; }
+        body { 
+            background-color: var(--bg); 
+            color: var(--glow); 
+            font-family: 'Courier New', monospace; 
+            margin: 0; 
+        }
         
-        #main-content { opacity: 0; display: none; transition: opacity 1s; }
+        /* Set to block and opacity 1 so it's visible immediately */
+        #main-content { 
+            opacity: 1; 
+            display: block; 
+        }
 
-        /* HERO SECTION */
         .hero { 
             text-align: center; 
             padding: 80px 20px; 
@@ -23,9 +28,7 @@
             margin: 20px;
             background: rgba(0, 255, 65, 0.02);
         }
-        .hero h1 { font-size: 2.5rem; letter-spacing: 2px; }
 
-        /* SECTIONS */
         .section-title { 
             color: var(--glow); 
             padding: 10px 20px;
@@ -34,38 +37,25 @@
             text-transform: uppercase;
         }
 
-        .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 0 20px; }
-        .feature-card { border: 1px solid rgba(0, 255, 65, 0.2); padding: 20px; background: #080808; }
-        
-        /* BUTTON */
-        .cta-btn { 
-            display: inline-block; 
-            padding: 15px 35px; 
-            border: 1px solid var(--glow); 
-            color: var(--glow); 
+        /* BUTTON STYLING */
+        .discord-btn {
+            display: block; 
+            background: #5865F2; 
+            color: #fff; 
+            padding: 18px; 
             text-decoration: none; 
-            margin-top: 20px;
-            transition: 0.3s;
+            font-weight: bold; 
+            border-radius: 4px; 
+            transition: 0.3s; 
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.2);
         }
-        .cta-btn:hover { background: var(--glow); color: #000; box-shadow: 0 0 20px var(--glow); }
-
-        /* LOADER */
-        #loading-screen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: var(--bg); z-index: 3000; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+        .discord-btn:hover {
+            transform: scale(1.02);
+            background: #4752C4;
         }
-        .bar { width: 200px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px; }
-        .fill { height: 100%; width: 0%; background: var(--glow); }
     </style>
 </head>
 <body>
-
-    <div id="loading-screen">
-        <div style="letter-spacing: 3px;">SYSTEM BOOTING...</div>
-        <div class="bar"><div id="fill" class="fill"></div></div>
-        <div id="status" style="font-size: 12px; margin-top: 10px; color: #444;">Connecting...</div>
-    </div>
 
 <div id="main-content">
     <div style="max-width: 400px; margin: 120px auto; padding: 50px; border: 1px solid var(--glow); background: rgba(0,255,65,0.02); text-align: center;">
@@ -75,7 +65,9 @@
             To access the GhostNet Dashboard, you must authorize your identity via the Discord Central Mainframe.
         </p>
 
-        <a href="https://discord.com/oauth2/authorize?client_id=1453941722324402327&response_type=code&redirect_uri=https%3A%2F%2Fghostnet-bot.github.io%2Fdashboard&scope=identify" onclick="simulateDiscordLogin(event)" style="display: block; background: #5865F2; color: #fff; padding: 18px; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.3s; box-shadow: 0 4px 15px rgba(88, 101, 242, 0.2);" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+        <a href="https://discord.com/oauth2/authorize?client_id=1453941722324402327&response_type=code&redirect_uri=https%3A%2F%2Fghostnet-bot.github.io%2Fdashboard&scope=identify" 
+           target="_blank" 
+           class="discord-btn">
             AUTHORIZE_VIA_DISCORD
         </a>
 
@@ -83,17 +75,11 @@
             SECURE_ENCRYPTION_ENABLED // RSA_4096
         </div>
     </div>
+
+    <footer style="text-align: center; padding: 40px; color: #333; font-size: 12px;">
+        GHOSTNET PROJECT | 2026
+    </footer>
 </div>
-
-
-
-
-        <footer style="text-align: center; padding: 40px; color: #333; font-size: 12px;">
-            GHOSTNET PROJECT | 2026
-        </footer>
-    </div>
-
-    <script src="script.js" defer></script>
 
 </body>
 </html>
