@@ -14,6 +14,7 @@
             font-family: 'Courier New', monospace; 
             margin: 0; 
         }
+
         
         /* Set to block and opacity 1 so it's visible immediately */
         #main-content { 
@@ -37,6 +38,7 @@
             text-transform: uppercase;
         }
 
+
         /* BUTTON STYLING */
         .discord-btn {
             display: block; 
@@ -52,6 +54,7 @@
         .discord-btn:hover {
             transform: scale(1.02);
             background: #4752C4;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
         }
     </style>
 </head>
@@ -65,7 +68,8 @@
             To access the GhostNet Dashboard, you must authorize your identity via the Discord Central Mainframe.
         </p>
 
-        <a href="https://discord.com/oauth2/authorize?client_id=1453941722324402327&response_type=code&redirect_uri=https%3A%2F%2Fghostnet-bot.github.io%2Fdashboard&scope=identify"
+        <a id="login-link" 
+           href="https://discord.com/oauth2/authorize?client_id=1453941722324402327&response_type=code&redirect_uri=https%3A%2F%2Fghostnet-bot.github.io%2Fdashboard&scope=identify"
            class="discord-btn">
             AUTHORIZE_VIA_DISCORD
         </a>
@@ -80,17 +84,17 @@
     </footer>
 </div>
 
-    <script>
+<script>
+    // This script ensures the link is built correctly using your variables
     const CLIENT_ID = '1453941722324402327'; 
     const REDIRECT_URI = encodeURIComponent('https://ghostnet-bot.github.io/dashboard');
-    
-    // We removed 'bot' and 'permissions'. Now it only asks "Who are you?"
     const SCOPES = 'identify'; 
 
-    document.getElementById('login-link').href = `https://discord.com/oauth2/authorize?client_id=1453941722324402327&response_type=code&redirect_uri=https%3A%2F%2Fghostnet-bot.github.io%2Fdashboard&scope=identify}`;
+    // Corrected the selector and removed the extra "}" bracket
+    const finalURL = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}`;
+    
+    document.getElementById('login-link').href = finalURL;
 </script>
-
-
 
 </body>
 </html>
