@@ -9,7 +9,7 @@
         :root { --glow: #00ff41; --bg: #0b0b0b; --sidebar: #121212; --panel: #181818; }
         body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
         
-        /* SIDEBAR */
+        /* SIDEBAR (Welcomer Style) */
         .sidebar { width: 260px; background: var(--sidebar); border-right: 1px solid #222; display: flex; flex-direction: column; padding: 20px 0; flex-shrink: 0; }
         .sidebar-brand { padding: 0 25px 20px; font-weight: bold; color: var(--glow); letter-spacing: 2px; border-bottom: 1px solid #222; margin-bottom: 20px; }
         .nav-item { padding: 12px 25px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 15px; font-size: 14px; transition: 0.2s; cursor: pointer; }
@@ -36,6 +36,12 @@
         .bar { width: 250px; height: 4px; background: #111; border-radius: 10px; margin-top: 20px; overflow: hidden; }
         .fill { height: 100%; width: 0%; background: var(--glow); transition: width 0.1s linear; }
 
+        /* DROPDOWN */
+        .dropdown { position: relative; }
+        .dropdown-menu { display: none; position: absolute; right: 0; top: 120%; background: var(--panel); border: 1px solid #333; min-width: 180px; border-radius: 4px; z-index: 100; }
+        .dropdown-menu a { display: block; padding: 12px; color: #ccc; text-decoration: none; font-size: 13px; }
+        .dropdown-menu a:hover { background: #222; color: var(--glow); }
+
         .dropdown-menu { display: none; position: absolute; right: 0; top: 120%; background: var(--panel); border: 1px solid #333; min-width: 180px; border-radius: 4px; }
     </style>
 </head>
@@ -60,9 +66,17 @@
 
     <div class="main-wrapper">
         <header class="top-bar">
-            <div style="display: flex; align-items: center; gap: 10px; background: #1a1a1a; padding: 8px 15px; border-radius: 20px;">
-                <img id="user-avatar" src="https://i.imgur.com/6VBx3io.png" style="width: 25px; height: 25px; border-radius: 50%;">
-                <span id="user-name" style="font-size: 13px;">GUEST_OPERATOR</span>
+            <a href="/" style="color: #666; text-decoration: none; font-size: 14px;">Home</a>
+            <div class="dropdown">
+                <div id="profile-trigger" style="display: flex; align-items: center; gap: 10px; cursor: pointer; background: #1a1a1a; padding: 8px 15px; border-radius: 20px;">
+                    <img id="user-avatar" src="https://i.imgur.com/6VBx3io.png" style="width: 25px; height: 25px; border-radius: 50%;">
+                    <span id="user-name" style="font-size: 13px;">OPERATOR_01</span>
+                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </div>
+                <div id="dropdown-menu" class="dropdown-menu">
+                    <a href="#">Documentation</a>
+                    <a href="#" onclick="logout()" style="color: #ff4444;">Disconnect</a>
+                </div>
             </div>
         </header>
 
