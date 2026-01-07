@@ -4,45 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHOSTNET | COMMAND CENTER</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/eeb01edac2.js" crossorigin="anonymous"></script>
     <style>
         :root { --glow: #00ff41; --bg: #0b0b0b; --sidebar: #121212; --panel: #181818; }
         body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
         
-        /* SIDEBAR (Welcomer Style) */
-        .sidebar { width: 260px; background: var(--sidebar); border-right: 1px solid #222; display: flex; flex-direction: column; padding: 20px 0; shrink: 0; }
+        /* SIDEBAR */
+        .sidebar { width: 260px; background: var(--sidebar); border-right: 1px solid #222; display: flex; flex-direction: column; padding: 20px 0; flex-shrink: 0; }
         .sidebar-brand { padding: 0 25px 20px; font-weight: bold; color: var(--glow); letter-spacing: 2px; border-bottom: 1px solid #222; margin-bottom: 20px; }
         .nav-item { padding: 12px 25px; color: #888; text-decoration: none; display: flex; align-items: center; gap: 15px; font-size: 14px; transition: 0.2s; cursor: pointer; }
         .nav-item:hover { background: rgba(0,255,65,0.05); color: var(--glow); }
         .nav-item.active { background: rgba(0,255,65,0.1); color: var(--glow); border-right: 3px solid var(--glow); }
         .nav-item i { width: 20px; text-align: center; }
 
-        /* MAIN CONTENT AREA */
+        /* MAIN CONTENT */
         .main-wrapper { flex-grow: 1; display: flex; flex-direction: column; }
         .top-bar { height: 70px; background: var(--sidebar); border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: flex-end; padding: 0 30px; gap: 20px; }
-        
         .content-body { padding: 30px; overflow-y: auto; flex-grow: 1; }
         
-        /* MODULE CARDS */
+        /* PANELS */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .panel { background: var(--panel); border: 1px solid #222; border-radius: 8px; padding: 25px; }
         .panel-header { font-size: 16px; font-weight: bold; margin-bottom: 20px; color: var(--glow); display: flex; align-items: center; gap: 10px; }
         
-        input, select, textarea { width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 4px; margin-top: 10px; font-family: 'Courier New'; }
+        input, textarea { width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 4px; margin-top: 10px; box-sizing: border-box; }
         button { background: var(--glow); color: #000; border: none; padding: 12px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 15px; transition: 0.3s; width: 100%; }
         button:hover { filter: brightness(1.2); box-shadow: 0 0 15px rgba(0,255,65,0.3); }
 
         /* LOADING SCREEN */
         #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .bar { width: 250px; height: 4px; background: #111; border-radius: 10px; margin-top: 20px; overflow: hidden; }
-        .fill { height: 100%; width: 0%; background: var(--glow); transition: width 0.05s linear; }
+        .fill { height: 100%; width: 0%; background: var(--glow); transition: width 0.1s linear; }
 
-        /* DROPDOWN */
-        .dropdown { position: relative; }
-        .dropdown-menu { display: none; position: absolute; right: 0; top: 120%; background: var(--panel); border: 1px solid #333; min-width: 180px; border-radius: 4px; z-index: 100; }
-        .dropdown-menu a { display: block; padding: 12px; color: #ccc; text-decoration: none; font-size: 13px; }
-        .dropdown-menu a:hover { background: #222; color: var(--glow); }
+        .dropdown-menu { display: none; position: absolute; right: 0; top: 120%; background: var(--panel); border: 1px solid #333; min-width: 180px; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -60,23 +54,15 @@
         <div class="nav-item"><i class="fas fa-user-shield"></i> AutoRoles</div>
         <div class="nav-item"><i class="fas fa-terminal"></i> System Logs</div>
         <div style="margin-top: auto;">
-            <a href="https://discord.gg/yourlink" target="_blank" class="nav-item"><i class="fab fa-discord"></i> Support Server</a>
+            <a href="#" class="nav-item"><i class="fab fa-discord"></i> Support Server</a>
         </div>
     </div>
 
     <div class="main-wrapper">
         <header class="top-bar">
-            <a href="/" style="color: #666; text-decoration: none; font-size: 14px;">Home</a>
-            <div class="dropdown">
-                <div id="profile-trigger" style="display: flex; align-items: center; gap: 10px; cursor: pointer; background: #1a1a1a; padding: 8px 15px; border-radius: 20px;">
-                    <img id="user-avatar" src="https://i.imgur.com/6VBx3io.png" style="width: 25px; height: 25px; border-radius: 50%;">
-                    <span id="user-name" style="font-size: 13px;">OPERATOR_01</span>
-                    <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
-                </div>
-                <div id="dropdown-menu" class="dropdown-menu">
-                    <a href="#">Documentation</a>
-                    <a href="#" onclick="logout()" style="color: #ff4444;">Disconnect</a>
-                </div>
+            <div style="display: flex; align-items: center; gap: 10px; background: #1a1a1a; padding: 8px 15px; border-radius: 20px;">
+                <img id="user-avatar" src="https://i.imgur.com/6VBx3io.png" style="width: 25px; height: 25px; border-radius: 50%;">
+                <span id="user-name" style="font-size: 13px;">GUEST_OPERATOR</span>
             </div>
         </header>
 
@@ -84,77 +70,74 @@
             <div class="grid">
                 <div class="panel">
                     <div class="panel-header"><i class="fas fa-bullhorn"></i> Welcomer Protocol</div>
-                    <p style="font-size: 12px; color: #777;">Set the message new connections receive.</p>
                     <textarea id="welcome-text" rows="3" placeholder="Welcome to the terminal, {user}..."></textarea>
-                    <button onclick="updateWelcome()">SAVE_PROTOCOL</button>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header"><i class="fas fa-satellite-dish"></i> System Broadcast</div>
-                    <p style="font-size: 12px; color: #777;">Send an official announcement to the server.</p>
-                    <input type="text" id="broadcast-msg" placeholder="Enter transmission...">
-                    <button onclick="sendBroadcast()" style="background: transparent; border: 1px solid var(--glow); color: var(--glow);">SEND_SIGNAL</button>
+                    <button>SAVE_PROTOCOL</button>
                 </div>
 
                 <div class="panel">
                     <div class="panel-header"><i class="fas fa-heartbeat"></i> AI_CORE_STATUS</div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <span style="color: #555;">Gemini_Neural_Link:</span>
-                        <span style="color: var(--glow);">CONNECTED</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <span style="color: #555;">Latency:</span>
-                        <span style="color: var(--glow);">14ms</span>
-                    </div>
-                    <button onclick="location.reload()" style="background: #222; color: #666; font-size: 10px; margin-top: 25px;">HARD_REFRESH</button>
+                    <div style="display: flex; justify-content: space-between;"><span style="color: #555;">Neural_Link:</span><span style="color: var(--glow);">ACTIVE</span></div>
+                    <button onclick="location.reload()" style="background: #222; color: #666; font-size: 10px;">HARD_REFRESH</button>
                 </div>
             </div>
         </main>
     </div>
 
-    <script src="script.js" defer></script>
     <script>
         const BOT_API = "https://ghostnet-0p4u.onrender.com"; 
 
-async function handleDiscordLogin() {
-    // Start bar moving immediately
-    const fill = document.getElementById('fill-bar');
-    let width = 0;
-    const interval = setInterval(() => {
-        if (width < 90) {
-            width += 2;
-            fill.style.width = width + '%';
-        }
-    }, 100);
+        async function handleDiscordLogin() {
+            const fill = document.getElementById('fill');
+            let width = 0;
+            
+            // Animation for loader
+            const interval = setInterval(() => {
+                if (width < 90) {
+                    width += 5;
+                    fill.style.width = width + '%';
+                }
+            }, 50);
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
 
-    if (code) {
-        try {
-            const response = await fetch(`${BOT_API}/login-callback?code=${code}`);
-            const userData = await response.json();
-            if (userData.username) {
-                localStorage.setItem('discord_user_name', userData.username);
-                localStorage.setItem('discord_user_avatar', `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`);
+            if (code) {
+                // CLEAN THE URL: Remove ?code=... so it doesn't break links
+                const cleanURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.replaceState({}, document.title, cleanURL);
+
+                try {
+                    const response = await fetch(`${BOT_API}/login-callback?code=${code}`);
+                    const userData = await response.json();
+                    
+                    if (userData.username) {
+                        localStorage.setItem('discord_user_name', userData.username);
+                        localStorage.setItem('discord_user_avatar', `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`);
+                    }
+                } catch (err) { 
+                    console.log("Auth Server Offline - Using Cached Profile"); 
+                }
             }
-        } catch (err) { console.log("Offline Mode"); }
-    }
 
-    // Force finish and hide loading screen
-    clearInterval(interval);
-    fill.style.width = '100%';
-    setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        const name = localStorage.getItem('discord_user_name');
-        const avatar = localStorage.getItem('discord_user_avatar');
-        if(name) document.getElementById('user-name').innerText = name;
-        if(avatar) document.getElementById('user-avatar').src = avatar;
-    }, 500);
-}
+            // Finish Loading
+            clearInterval(interval);
+            fill.style.width = '100%';
+            
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                }, 500);
 
-document.addEventListener('DOMContentLoaded', handleDiscordLogin);
+                // Update UI with stored data
+                const savedName = localStorage.getItem('discord_user_name');
+                const savedAvatar = localStorage.getItem('discord_user_avatar');
+                if(savedName) document.getElementById('user-name').innerText = savedName;
+                if(savedAvatar) document.getElementById('user-avatar').src = savedAvatar;
+            }, 400);
+        }
 
+        document.addEventListener('DOMContentLoaded', handleDiscordLogin);
     </script>
 </body>
 </html>
