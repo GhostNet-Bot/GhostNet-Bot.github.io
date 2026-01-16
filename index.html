@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME | GHOSTNET</title>
-    <link rel="stylesheet" href="style.css">
-    <!--fa-->
     <script src="https://kit.fontawesome.com/eeb01edac2.js" crossorigin="anonymous"></script>
-    <!--end of fa-->
     <style>
         :root { --glow: #00ff41; --bg: #050505; }
         
         body { background-color: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; }
         
-        #main-content { opacity: 0; display: none; transition: opacity 1s; }
+        /* Ensure content is visible if you aren't using the loader script right now */
+        #main-content { opacity: 1; display: block; transition: opacity 1s; }
 
         /* HERO SECTION */
         .hero { 
@@ -23,7 +21,12 @@
             margin: 20px;
             background: rgba(0, 255, 65, 0.02);
         }
-        .hero h1 { font-size: 2.5rem; letter-spacing: 2px; }
+        .hero h1 { font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .hero p { margin-bottom: 30px; color: #888; }
+
+        /* HEADER & NAV */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(0, 255, 65, 0.1); }
+        .nav-links a { color: var(--glow); text-decoration: none; margin-left: 20px; font-size: 13px; letter-spacing: 1px; }
 
         /* SECTIONS */
         .section-title { 
@@ -37,71 +40,50 @@
         .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 0 20px; }
         .feature-card { border: 1px solid rgba(0, 255, 65, 0.2); padding: 20px; background: #080808; }
         
-        /* BUTTON */
+        /* BUTTONS */
+        .btn-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
         .cta-btn { 
             display: inline-block; 
-            padding: 15px 35px; 
+            padding: 15px 30px; 
             border: 1px solid var(--glow); 
             color: var(--glow); 
             text-decoration: none; 
-            margin-top: 20px;
             transition: 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+            min-width: 200px;
         }
         .cta-btn:hover { background: var(--glow); color: #000; box-shadow: 0 0 20px var(--glow); }
+        .cta-btn.secondary { background: rgba(0, 255, 65, 0.05); }
 
-        /* LOADER */
-        #loading-screen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: var(--bg); z-index: 3000; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-        }
-        .bar { width: 200px; height: 2px; background: #111; border: 1px solid var(--glow); margin-top: 20px; }
-        .fill { height: 100%; width: 0%; background: var(--glow); }
     </style>
 </head>
 <body>
 
-    <div id="loading-screen">
-        <div style="letter-spacing: 3px;">SYSTEM BOOTING...</div>
-        <div class="bar"><div id="fill" class="fill"></div></div>
-        <div id="status" style="font-size: 12px; margin-top: 10px; color: #444;">Connecting...</div>
-    </div>
-
     <div id="main-content">
-<header class="header">
-    <div style="display: flex; flex-direction: column;">
-        <span style="font-weight: bold; letter-spacing: 2px;">[ GHOSTNET ]</span>
-<div id="status-container" style="
-    margin-top: 8px; 
-    display: inline-flex; 
-    align-items: center; 
-    padding: 4px 12px; 
-    background: rgba(0, 255, 65, 0.05); /* Very faint green tint */
-    border: 1px solid rgba(0, 255, 65, 0.15); /* Subtle border */
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 1.5px;">
-    <span id="status-dot" style="height: 8px; width: 8px; background: #444; border-radius: 50%; margin-right: 10px; transition: 0.5s;"></span>
-    <span id="status-text" style="color: #444; text-transform: uppercase;">SYSTEM_OFFLINE</span>
-</div>
-    </div>
-
-    <nav class="nav-links">
-        <a href="/"><i class="fa-solid fa-house-chimney"></i> HOME</a>
-        <a href="/features"><i class="fa-solid fa-cogs"></i> FEATURES</a>
-        <a href="/dev"><i class="fa-solid fa-file-alt"></i> LOGS</a>
-        <span style="color: #222; margin: 0 10px;">|</span>
-        <span id="guest-links">
-            <a href="/login"><i class="fa-solid fa-arrow-right-to-bracket"></i> LOGIN</a>
-        </span>
-    </nav>
-</header>
+        <header class="header">
+            <div style="display: flex; flex-direction: column;">
+                <span style="font-weight: bold; letter-spacing: 2px;">[ GHOSTNET ]</span>
+            </div>
+            <nav class="nav-links">
+                <a href="/"><i class="fa-solid fa-house-chimney"></i> HOME</a>
+                <a href="/login"><i class="fa-solid fa-arrow-right-to-bracket"></i> LOGIN</a>
+            </nav>
+        </header>
 
         <section class="hero">
             <h1>It's time to protect your server.</h1>
             <p>GhostNet is a powerful Discord utility designed for surveillance and automation.</p>
-            <a href="https://discord.com/oauth2/authorize?client_id=1453941722324402327&permissions=8&integration_type=0&scope=bot+applications.commands" class="cta-btn" target="_blank"><i class="fa-brands fa-discord"></i> ADD TO DISCORD</a>
+            
+            <div class="btn-container">
+                <a href="https://discord.com/oauth2/authorize?client_id=1453941722324402327&permissions=8&integration_type=0&scope=bot+applications.commands" class="cta-btn" target="_blank">
+                    <i class="fa-brands fa-discord"></i> ADD TO DISCORD
+                </a>
+                
+                <a href="https://discord.gg/YOUR_INVITE_LINK" class="cta-btn secondary" target="_blank">
+                    <i class="fa-solid fa-play"></i> PLAY IN OUR SERVER
+                </a>
+            </div>
         </section>
 
         <div class="section-title"><i class="fa-solid fa-star"></i> Core Capabilities</div>
@@ -120,84 +102,10 @@
             </div>
         </div>
 
-
-        <div class="section-title"><i class="fa-solid fa-play"></i> How to get started</div>
-        <div class="content-grid">
-            <div class="feature-card">
-                <h4 style="color: var(--glow);">01. Invite</h4>
-                <p>Add the bot to your server using the invite link.</p>
-            </div>
-            <div class="feature-card">
-                <h4 style="color: var(--glow);">02. Configure</h4>
-                <p>Run the setup commands to customize your settings.</p>
-            </div>
-            <div class="feature-card">
-                <h4 style="color: var(--glow);">03. Secure</h4>
-                <p>Sit back while GhostNet handles the server management.</p>
-            </div>
-        </div>
-
-        <!--About Section-->
-        
-        <section style="padding: 80px 20px; text-align: center; border-bottom: 1px solid rgba(0,255,65,0.1);">
-    <h2 style="letter-spacing: 4px; color: #fff;">[ 01_THE_ORIGIN ]</h2>
-    <p style="color: #888; max-width: 650px; margin: 25px auto; line-height: 1.8; font-size: 15px;">
-        GhostNet was forged from the necessity of total server control. Born in private development channels, it has evolved into a high-tier surveillance and automation matrix.
-    </p>
-    <a href="about.html" style="color: var(--glow); text-decoration: none; border: 1px solid var(--glow); padding: 12px 25px; font-size: 11px; letter-spacing: 2px; transition: 0.3s;" onmouseover="this.style.background='rgba(0,255,65,0.1)'" onmouseout="this.style.background='transparent'">
-        <i class="fas fa-database"></i> LEARN_MORE
-    </a>
-        </section>
-
-        <!--end of About Section-->
-
-        <!--Review section-->
-        <section style="padding: 80px 20px; background: rgba(0,255,65,0.02); border-bottom: 1px solid rgba(0,255,65,0.1);">
-    <h2 style="text-align: center; margin-bottom: 40px; letter-spacing: 3px;">USER_FEEDBACK</h2>
-    
-    <div style="display: flex; align-items: center; justify-content: center; gap: 30px;">
-        <i class="fas fa-chevron-left" onclick="moveReview(-1)" style="cursor: pointer; color: var(--glow); font-size: 24px;"></i>
-        
-        <div style="width: 100%; max-width: 600px; height: 180px; display: flex; align-items: center; justify-content: center; border: 1px solid #111; background: #000; position: relative; padding: 30px; box-shadow: inset 0 0 15px rgba(0,255,65,0.05);">
-            <div style="text-align: center;">
-                <p id="review-text" style="font-style: italic; font-size: 16px; color: #ccc;">"The infection system is terrifyingly efficient. Isaac never saw it coming."</p>
-                <h4 id="review-user" style="color: var(--glow); margin-top: 20px; letter-spacing: 2px;">- Staff_Member_X</h4>
-            </div>
-        </div>
-
-        <i class="fas fa-chevron-right" onclick="moveReview(1)" style="cursor: pointer; color: var(--glow); font-size: 24px;"></i>
-    </div>
-</section>
-
-        <!--end of Review section-->
-
-        <!--Closing Section-->
-        <section style="padding: 100px 20px; text-align: center; background: linear-gradient(to bottom, #050505, #0a0a0a);">
-    <h1 style="font-size: 2.5rem; letter-spacing: 8px; margin-bottom: 15px;">READY_TO_BOOT?</h1>
-    <p style="color: #666; margin-bottom: 40px; font-size: 14px;">Establish your connection to the mainframe and begin deployment.</p>
-    
-    <div style="display: flex; justify-content: center; gap: 20px;">
-        <a href="/login" style="background: var(--glow); color: #000; padding: 18px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px; transition: 0.3s;" onmouseover="this.style.boxShadow='0 0 20px var(--glow)'" onmouseout="this.style.boxShadow='none'">
-            <!--<i class="fas fa-user-plus"></i>--><!--<i class="fas fa-sign-in-alt"></i>-->
-            
-            <i class="fa-solid fa-arrow-right-to-bracket"></i> 
-            <!--SIGN_UP-->
-            LOGIN
-        </a>
-        <!--<a href="login.html" style="border: 1px solid var(--glow); color: var(--glow); padding: 18px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px;">
-            <i class="fas fa-sign-in-alt"></i> LOGIN
-        </a>-->
-    </div>
-</section>
-
-        <!--end of Closing Section-->
-
         <footer style="text-align: center; padding: 40px; color: #333; font-size: 12px;">
             GHOSTNET PROJECT | 2026
         </footer>
     </div>
-
-    <script src="script.js" defer></script>
 
 </body>
 </html>
